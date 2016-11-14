@@ -1,3 +1,5 @@
+package page
+
 import geb.Page
 
 class ExamPlannerHomePage extends Page {
@@ -5,6 +7,7 @@ class ExamPlannerHomePage extends Page {
     static at = { title == "- ExamPlanner" }
 
     static content = {
-        header { $(".Navigation-entry span").text()}
+        header { $(".Navigation-entry span").text() }
+        loginButton { $("#loginLink") }
     }
 }

@@ -6,12 +6,12 @@
 
 
 import org.openqa.selenium.chrome.ChromeDriver
-import org.openqa.selenium.firefox.FirefoxDriver
 import org.openqa.selenium.firefox.MarionetteDriver
 import org.openqa.selenium.phantomjs.PhantomJSDriver
 
 waiting {
-	timeout = 2
+	timeout = 10
+	retryInterval = 0.2
 }
 
 environments {
