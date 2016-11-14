@@ -7,6 +7,7 @@
 
 import org.openqa.selenium.chrome.ChromeDriver
 import org.openqa.selenium.firefox.FirefoxDriver
+import org.openqa.selenium.firefox.MarionetteDriver
 import org.openqa.selenium.phantomjs.PhantomJSDriver
 
 waiting {
@@ -24,7 +25,8 @@ environments {
 	// run via “./gradlew firefoxTest”
 	// See: http://code.google.com/p/selenium/wiki/FirefoxDriver
 	firefox {
-		driver = { new FirefoxDriver() }
+		System.setProperty("webdriver.gecko.driver", "src/test/resources/geckodriver.exe")
+		driver = { new MarionetteDriver() }
 	}
 
     phantomJs {
