@@ -20,5 +20,13 @@ class DashboardPage extends Page {
         calendar { $("#calendar") }
         navbar {$(".Navigation-list").module(NavbarModule)}
     }
+
+    void addSession() {
+        addSessionButton.click()
+    }
+
+    void register() {
+        registerButton.click()
+    }
 }
 
