@@ -20,7 +20,7 @@ class SessionSpec extends GebReportingSpec {
         to SessionPage
 
         then:
-        assert sessionFormTitle == "Dodaj Sesję"
+        sessionFormTitle == "Dodaj Sesję"
     }
 
     def "Create new valid session"() {
