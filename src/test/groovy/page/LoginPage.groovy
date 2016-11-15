@@ -23,7 +23,7 @@ class LoginPage extends Page{
         logInButton { $("input", 0, value: "Zaloguj się") }
     }
 
-    void logIn (email, password) {
+    void logIn (String email, String password) {
         emailInput << email
         passwordInput << password
         logInButton.click()

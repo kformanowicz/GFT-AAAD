@@ -36,15 +36,12 @@ class CommonHelper {
         logInAsUser("user3")
     }
 
-    static void logInAsUser(user) {
+    static void logInAsUser(String user) {
         def jsonParser = CommonHelper.jsonToObject('src\\test\\resources\\values.json')
-        LinkedHashMap map = (LinkedHashMap)jsonParser
-        def users = map.get("users")
-        def targetUser = users.get(user)
 
         LoginPage loginPage = new LoginPage()
         Browser browser = new Browser()
         browser.to(loginPage)
-        loginPage.logIn(targetUser.login, targetUser.password)
+        loginPage.logIn(jsonParser.users.get(user).login, jsonParser.users.get(user).password)
     }
 }
