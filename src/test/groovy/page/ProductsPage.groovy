@@ -108,4 +108,32 @@ class ProductsPage extends Page {
         sortByHeaderDesc(productStatusHeader)
     }
 
+    List getAllProductsNames() {
+        return products*.productName
+    }
+
+    List getAllProductsAvailabilityDates(){
+        return products*.productDate
+    }
+
+    List getAllProductsLevels() {
+        return products*.productLevel
+    }
+
+    List getAllProductsLanguages() {
+        return products*.productLanguage
+    }
+
+    List getAllProductsTypes() {
+        return products*.productType
+    }
+
+    List getAllProductsAvailibeRegistrations() {
+        return products*.productAvailableRegistrations
+    }
+
+    List getAllProductsStatuses(){
+        return products*.productStatus
+    }
+
 }

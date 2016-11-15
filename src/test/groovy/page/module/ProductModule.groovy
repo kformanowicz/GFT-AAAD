@@ -15,4 +15,8 @@ class ProductModule extends Module{
         productStatus {cell(6).text()}
         productActions {cell(7)}
     }
+
+    void goToProductDetails(){
+        productActions.click()
+    }
 }
