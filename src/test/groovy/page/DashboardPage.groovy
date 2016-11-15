@@ -1,6 +1,7 @@
 package page
 
 import geb.Page
+import page.module.EventModule
 import page.module.NavbarModule
 
 class DashboardPage extends Page {
@@ -13,12 +14,14 @@ class DashboardPage extends Page {
     }
 
     static content = {
-        addSessionButton { $("a", text: "Dodaj sesję") }
-        registerButton { $("a", text: "Dodaj zgłoszenie") }
+        addSessionButton { $("a", href: "/gftpl/Session/AddSession") }
+        registerButton { $("a", href: "/gftpl") }
         todayButton { $("button", text: "Dziś") }
         registeredTable { $("table") }
         calendar { $("#calendar") }
-        navbar {$(".Navigation-list").module(NavbarModule)}
+        events { calendar.find(".fc-event-container .fc-event") }
+        openedEvent { $(".popover-bottom").module(EventModule) }
+        navbar { $(".Navigation-list").module(NavbarModule) }
     }
 
     void addSession() {
@@ -27,6 +30,11 @@ class DashboardPage extends Page {
 
     void register() {
         registerButton.click()
+    }
+
+    void openEvent(eventTitle) {
+        def event = events.find { it.text() == eventTitle }
+        event.click()
     }
 }
 
