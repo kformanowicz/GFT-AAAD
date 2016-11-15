@@ -16,12 +16,13 @@ class LoginSpec extends GebReportingSpec {
 
     def "clicking 'Zaloguj się' button with correct credentials filled in forward to dashboard"() {
         when:
-        to LoginPage
+        via LoginPage
 
         and:
-        logIn(jsonParser.users.user1.login, jsonParser.users.user1.password)
+       // logIn(jsonParser.users.user1.login, jsonParser.users.user1.password)
+        CommonHelper.logInAsUser1()
 
         then:
-        at DashboardPage
+        waitFor {at DashboardPage}
     }
 }

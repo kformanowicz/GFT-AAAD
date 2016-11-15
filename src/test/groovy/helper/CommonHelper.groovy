@@ -1,6 +1,7 @@
 package helper
 
 import groovy.json.JsonSlurper
+import page.LoginPage
 
 
 class CommonHelper {
@@ -19,5 +20,15 @@ class CommonHelper {
         def jsonSlurper = new JsonSlurper()
         def object = jsonSlurper.parseText(json)
         return object
+    }
+
+    static void logInAsUser1() {
+        logInAsUser("user1")
+    }
+
+    static void logInAsUser(user) {
+        def jsonParser = CommonHelper.jsonToObject('src\\test\\resources\\values.json')
+        LoginPage loginPage = new LoginPage();
+        loginPage.logIn(jsonParser.users.user.login, jsonParser.users.user.password)
     }
 }
