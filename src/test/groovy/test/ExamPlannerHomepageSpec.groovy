@@ -18,7 +18,10 @@ class ExamPlannerHomepageSpec extends GebReportingSpec {
         when:
         via ExamPlannerHomePage
 
+        and:
+        loginButton.click()
+
         then:
-        loginButton.click(LoginPage)
+        waitFor {at LoginPage}
     }
 }
