@@ -2,8 +2,7 @@ package test
 
 import geb.spock.GebReportingSpec
 import page.LoginPage
-import page.SessionPage
-import spock.lang.Ignore
+import page.sessionPage.SessionPage
 
 class SessionSpec extends GebReportingSpec {
 
@@ -29,8 +28,7 @@ class SessionSpec extends GebReportingSpec {
         to SessionPage
 
         then:
-        setDate("Dodaj Sesję")
-        sleep(5000)
+        sleep(1000)
     }
 
 }
