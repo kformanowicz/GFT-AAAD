@@ -1,6 +1,8 @@
 package helper
 
+import geb.Browser
 import groovy.json.JsonSlurper
+import groovy.json.internal.LazyMap
 import page.LoginPage
 
 
@@ -26,9 +28,23 @@ class CommonHelper {
         logInAsUser("user1")
     }
 
+    static void logInAsUser2() {
+        logInAsUser("user2")
+    }
+
+    static void logInAsUser3() {
+        logInAsUser("user3")
+    }
+
     static void logInAsUser(user) {
         def jsonParser = CommonHelper.jsonToObject('src\\test\\resources\\values.json')
-        LoginPage loginPage = new LoginPage();
-        loginPage.logIn(jsonParser.users.user.login, jsonParser.users.user.password)
+        LinkedHashMap map = (LinkedHashMap)jsonParser
+        def users = map.get("users")
+        def targetUser = users.get(user)
+
+        LoginPage loginPage = new LoginPage()
+        Browser browser = new Browser()
+        browser.to(loginPage)
+        loginPage.logIn(targetUser.login, targetUser.password)
     }
 }
