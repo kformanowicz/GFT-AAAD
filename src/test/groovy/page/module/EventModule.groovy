@@ -6,8 +6,8 @@ import geb.Module
 class EventModule extends Module {
     static content = {
         title { $(".popover-title").text() }
-        registered { $(".popover-content > div").text().split(": ").last() }
-        freeSpaces { $(".popover-content > div").closest("div").text().split(": ").last() }
+        registered { $(".popover-content > div").text().split(": ").last().toInteger() }
+        freeSpaces { $(".popover-content > div").closest("div").text().split(": ").last().toInteger() }
         detailsButton { $(".btn-info") }
         deleteButton { $(".btn-danger") }
     }
