@@ -10,7 +10,7 @@ import helper.CommonHelper
  */
 class LoginSpec extends GebReportingSpec {
 
-    def "clicking 'Zaloguj się' button with correct credentials filled in forward to dashboard"() {
+    def "should forward to dashboard after clicking log in button"() {
         when:
         via LoginPage
 
