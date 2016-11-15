@@ -6,6 +6,7 @@ import geb.Page
  * Created by kffz on 14/11/2016.
  */
 class LoginPage extends Page{
+    static url = "/Account/Login"
 
     static at = { title == "Zaloguj się - ExamPlanner" }
 
@@ -22,11 +23,9 @@ class LoginPage extends Page{
         logInButton { $("input", 0, value: "Zaloguj się") }
     }
 
-    static def "log in with email and password" (email, password) {
-        this.emailInput = email
-        this.passwordInput = password
-        this.logInButton.click()
-// do odkomentowania po implementacji DashboardPage
-//        logInButton.click(DashboardPage)
+    void logIn (email, password) {
+        emailInput << email
+        passwordInput << password
+        logInButton.click()
     }
 }
