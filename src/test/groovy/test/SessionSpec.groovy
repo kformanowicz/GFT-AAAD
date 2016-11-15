@@ -15,12 +15,13 @@ class SessionSpec extends GebReportingSpec {
 
     }
 
-    def "Correct form title is displayed"() {
+    def "Should be visible all field in form and correct titles"() {
         when:
         to SessionPage
 
         then:
-        sessionFormTitle == "Dodaj Sesję"
+        assertAllFieldsVisibleInForm()
+        assertAllTitlesAreCorrect()
     }
 
     def "Create new valid session"() {

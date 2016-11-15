@@ -222,9 +222,10 @@ class SessionPage extends Page {
         assert examinerSelect.isDisplayed()
     }
 
-    void assertAllTitleAreCorrect() {
+    void assertAllTitlesAreCorrect() {
         def data = CommonHelper.jsonToObject("../../../../resources/applicationData.json")
 
+        assert sessionFormTitle == data.sessionForm.formTitle
         assert sessionDateTitle == data.sessionForm.date
         assert postalCodeTitle == data.sessionForm.postalCode
         assert cityTitle == data.sessionForm.city
