@@ -10,4 +10,8 @@ class ExamPlannerHomePage extends Page {
         header { $(".Navigation-entry span").text() }
         loginButton { $("#loginLink") }
     }
+
+    void clickLoginButton() {
+        loginButton.click()
+    }
 }
