@@ -1,14 +1,14 @@
 package test
 
 import geb.spock.GebReportingSpec
+import helper.CommonHelper
 import page.LoginPage
 import page.sessionPage.SessionPage
 
 class SessionSpec extends GebReportingSpec {
 
     def setupSpec() {
-        to LoginPage
-        makeLogin("gft.poland1@pgs-soft.com", "9dbiUZbDif")
+        CommonHelper.logInAsUser1()
     }
 
     def cleanupSpec() {

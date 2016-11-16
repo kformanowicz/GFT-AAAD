@@ -9,15 +9,15 @@ class DashboardPage extends Page {
 
     static at = {
         title == "- ExamPlanner"
-        registeredTable.displayed
-        calendar.displayed
+        $("#productList").displayed
+        $("#calendar").displayed
     }
 
     static content = {
         addSessionButton { $("a", href: "/gftpl/Session/AddSession") }
         registerButton { $("a", href: "/gftpl") }
         todayButton { $("button", text: "Dziś") }
-        registeredTable { $("table") }
+        registeredTable { $("#productList") }
         calendar { $("#calendar") }
         events { calendar.find(".fc-event-container .fc-event") }
         openedEvent { $(".popover-bottom").module(EventModule) }
