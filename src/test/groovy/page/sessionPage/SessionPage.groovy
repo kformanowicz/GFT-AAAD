@@ -14,7 +14,8 @@ class SessionPage extends Page {
 
     static at = {
         title == "- ExamPlanner"
-        sessionForm.displayed
+        assertAllTitlesAreCorrect()
+        assertAllFieldsVisibleInForm()
     }
 
     static content = {
@@ -31,7 +32,7 @@ class SessionPage extends Page {
         cityInput { $("#SessionDto_Location_City").module(TextInput) }
 
         addressTitle { $(".form-group label", 3).text() }
-        addressInput { $("SessionDto_Location_Address").module(TextInput) }
+        addressInput { $("#SessionDto_Location_Address").module(TextInput) }
 
         additionalInformationTitle { $(".form-group label", 4).text() }
         additionalInformationInput { $("#SessionDto_AdditionalInformation").module(Textarea) }
@@ -39,7 +40,7 @@ class SessionPage extends Page {
         typeOfSpaceTitle { $(".form-group label", 5).text() }
         typeOfSpaceRadioButtons { $(name: "SessionDto.PlaceManagement").module(RadioButtons) }
 
-        spaceForSessionTitle { $(".form-group.spacePerSession label" ).text() }
+        spaceForSessionTitle { $('.form-group.spacePerSession label\\"' ).text() }
         spaceForSession { $(".form-group.spacePerSession input").module(TextInput) }
 
         levelSelectTitle { $(".form-group label", 6).text() }
@@ -52,7 +53,7 @@ class SessionPage extends Page {
         examinerSelect { $("#SessionDto_ExaminerId").module(Select) }
 
         cancelButton { $(".Backoffice-buttonsContainerBottom button", 0) }
-        saveButton { $(".Backoffice-buttonsContainerBottom button", 1) }
+        saveButton { $(".btn-move-right > button") }
     }
 
 //    SETTERS
@@ -169,11 +170,11 @@ class SessionPage extends Page {
     }
 
     String getSaveButtonText() {
-        return saveButton.getAttribute("a")
+        return saveButton.text()
     }
 
     String getCancelButtonText() {
-        return cancelButton.getAttribute("a")
+        return cancelButton.find("a").text()
     }
 
 //    ACTIONS
@@ -215,7 +216,9 @@ class SessionPage extends Page {
         assert cityInput.isDisplayed()
         assert addressInput.isDisplayed()
         assert additionalInformationInput.isDisplayed()
-        assert typeOfSpaceRadioButtons.isDisplayed()
+//        typeOfSpaceRadioButtons.each {
+//            assert it.isDisplayed()
+//        }
         assert spaceForSession.isDisplayed()
         assert levelSelect.isDisplayed()
         assert productSelect.isDisplayed()
@@ -223,7 +226,7 @@ class SessionPage extends Page {
     }
 
     void assertAllTitlesAreCorrect() {
-        def data = CommonHelper.jsonToObject("../../../../resources/applicationData.json")
+        def data = CommonHelper.jsonToObject("src/test/resources/applicationData.json")
 
         assert sessionFormTitle == data.sessionForm.formTitle
         assert sessionDateTitle == data.sessionForm.date
