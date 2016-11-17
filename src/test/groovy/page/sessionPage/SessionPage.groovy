@@ -14,8 +14,8 @@ class SessionPage extends Page {
 
     static at = {
         title == "- ExamPlanner"
-        assertAllTitlesAreCorrect()
-        assertAllFieldsVisibleInForm()
+        checkDefaultTitlesInForm()
+        checkDefaultFieldsVisibilityInForm()
     }
 
     static content = {
@@ -38,19 +38,22 @@ class SessionPage extends Page {
         additionalInformationInput { $("#SessionDto_AdditionalInformation").module(Textarea) }
 
         typeOfSpaceTitle { $(".form-group label", 5).text() }
-        typeOfSpaceRadioButtons { $(name: "SessionDto.PlaceManagement").module(RadioButtons) }
+        typeOfSpaceRadioButtons { $("input", name: "SessionDto.PlaceManagement").module(RadioButtons) }
 
         spaceForSessionTitle { $('.form-group.spacePerSession label\\"' ).text() }
-        spaceForSession { $(".form-group.spacePerSession input").module(TextInput) }
+        spaceForSession { $("input", name: "SessionDto.SpaceForSession") }
 
         levelSelectTitle { $(".form-group label", 6).text() }
-        levelSelect { $(".btn-group.bootstrap-select.show-tick.level").module(MultipleSelect) }
+        levelDropDownIsDisplayed { $(".btn-group.bootstrap-select.show-tick.level").isDisplayed() }
+        levelSelect { $(".btn-group.bootstrap-select.show-tick.level select").module(MultipleSelect) }
 
         productSelectTitle { $(".form-group label", 7).text() }
-        productSelect { $(".btn-group.bootstrap-select.show-tick.product").module(MultipleSelect) }
+        productDropDownIsDisplayed { $(".btn-group.bootstrap-select.show-tick.product").isDisplayed() }
+        productSelect { $(".btn-group.bootstrap-select.show-tick.product select").module(MultipleSelect) }
 
         examinerSelectTitle { $(".form-group label", 8).text() }
-        examinerSelect { $("#SessionDto_ExaminerId").module(Select) }
+        examinerSelectIsDisplayed { $(".btn-group.bootstrap-select.form-control").isDisplayed() }
+        examinerSelect { $("#SessionDto_ExaminerId select").module(Select) }
 
         cancelButton { $(".Backoffice-buttonsContainerBottom button", 0) }
         saveButton { $(".btn-move-right > button") }
@@ -90,8 +93,8 @@ class SessionPage extends Page {
     }
 
     void setAmountOfSpace(int data) {
-        spaceForSession.text = ""
-        spaceForSession.text = data.toString()
+        spaceForSession.value("")
+        spaceForSession.value(data)
     }
 
     void setLevel(ArrayList<String> data) {
@@ -142,7 +145,7 @@ class SessionPage extends Page {
     }
 
     String getAmountOfSpace() {
-        return spaceForSession.text
+        return spaceForSession.text()
     }
 
     ArrayList<String> getSelectedLevelsId() {
@@ -210,22 +213,20 @@ class SessionPage extends Page {
     }
 
 //    ASSERTIONS
-    void assertAllFieldsVisibleInForm() {
+    void checkDefaultFieldsVisibilityInForm() {
         assert sessionDateInput.isDisplayed()
         assert postalCodeInput.isDisplayed()
         assert cityInput.isDisplayed()
         assert addressInput.isDisplayed()
         assert additionalInformationInput.isDisplayed()
-//        typeOfSpaceRadioButtons.each {
-//            assert it.isDisplayed()
-//        }
+        assert typeOfSpaceRadioButtons*.isDisplayed()
         assert spaceForSession.isDisplayed()
-        assert levelSelect.isDisplayed()
-        assert productSelect.isDisplayed()
-        assert examinerSelect.isDisplayed()
+        assert levelDropDownIsDisplayed
+        assert productDropDownIsDisplayed
+        assert examinerSelectIsDisplayed
     }
 
-    void assertAllTitlesAreCorrect() {
+    void checkDefaultTitlesInForm() {
         def data = CommonHelper.jsonToObject("src/test/resources/applicationData.json")
 
         assert sessionFormTitle == data.sessionForm.formTitle
