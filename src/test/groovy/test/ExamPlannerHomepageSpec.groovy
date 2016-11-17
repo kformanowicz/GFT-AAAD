@@ -6,6 +6,10 @@ import page.LoginPage
 
 class ExamPlannerHomepageSpec extends GebReportingSpec {
 
+    def setupSpec(){
+        clearCookies()
+    }
+
     def "Correct header is displayed"() {
         when:
         to ExamPlannerHomePage

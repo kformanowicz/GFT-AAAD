@@ -14,8 +14,8 @@ class DashboardPage extends Page {
     }
 
     static content = {
-        addSessionButton { $("a", href: "/gftpl/Session/AddSession") }
-        registerButton { $("a", href: "/gftpl") }
+        addSessionButton { $("a.btn", href: "/gftpl/Session/AddSession") }
+        registerButton { $("a.btn", href: "/gftpl") }
         todayButton { $("button", text: "Dziś") }
         registeredTable { $("#productList") }
         calendar { $("#calendar") }
@@ -35,6 +35,14 @@ class DashboardPage extends Page {
     void openEvent(eventTitle) {
         def event = events.find { it.text() == eventTitle }
         event.click()
+    }
+
+    void assertElementsDisplayed(){
+        assert addSessionButton.displayed
+        assert registerButton.displayed
+        assert todayButton.displayed
+        assert registeredTable.displayed
+        assert calendar.displayed
     }
 }
 
