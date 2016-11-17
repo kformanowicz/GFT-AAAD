@@ -14,8 +14,7 @@ class SessionPage extends Page {
 
     static at = {
         title == "- ExamPlanner"
-        checkDefaultTitlesInForm()
-        checkDefaultFieldsVisibilityInForm()
+        $(".col-sm-15.col-sm-offset-8.clearfix").isDisplayed()
     }
 
     static content = {
@@ -210,38 +209,6 @@ class SessionPage extends Page {
         } else {
             cancelForm()
         }
-    }
-
-//    ASSERTIONS
-    void checkDefaultFieldsVisibilityInForm() {
-        assert sessionDateInput.isDisplayed()
-        assert postalCodeInput.isDisplayed()
-        assert cityInput.isDisplayed()
-        assert addressInput.isDisplayed()
-        assert additionalInformationInput.isDisplayed()
-        assert typeOfSpaceRadioButtons*.isDisplayed()
-        assert spaceForSession.isDisplayed()
-        assert levelDropDownIsDisplayed
-        assert productDropDownIsDisplayed
-        assert examinerSelectIsDisplayed
-    }
-
-    void checkDefaultTitlesInForm() {
-        def data = CommonHelper.jsonToObject("src/test/resources/applicationData.json")
-
-        assert sessionFormTitle == data.sessionForm.formTitle
-        assert sessionDateTitle == data.sessionForm.date
-        assert postalCodeTitle == data.sessionForm.postalCode
-        assert cityTitle == data.sessionForm.city
-        assert addressTitle == data.sessionForm.address
-        assert additionalInformationTitle == data.sessionForm.additionalInformation
-        assert typeOfSpaceTitle == data.sessionForm.typeOfSpace
-        assert spaceForSessionTitle == data.sessionForm.amountOfSpace
-        assert levelSelectTitle == data.sessionForm.level
-        assert productSelectTitle == data.sessionForm.product
-        assert examinerSelectTitle == data.sessionForm.examiner
-        assert getCancelButtonText() == data.sessionForm.cancelButton
-        assert getSaveButtonText() == data.sessionForm.saveButton
     }
 
 }
