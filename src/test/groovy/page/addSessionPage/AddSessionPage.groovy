@@ -1,4 +1,4 @@
-package page.sessionPage
+package page.addSessionPage
 
 import geb.Page
 import geb.module.MultipleSelect
@@ -8,7 +8,7 @@ import geb.module.TextInput
 import geb.module.Textarea
 import helper.CommonHelper
 
-class SessionPage extends Page {
+class AddSessionPage extends Page {
 
     static url = "Session/AddSession"
 
