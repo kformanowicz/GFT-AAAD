@@ -15,7 +15,7 @@ class AddSessionPage extends Page {
     static at = {
         title == "- ExamPlanner"
         checkDefaultTitlesInForm()
-        checkDefaultFieldsVisibilityInForm()
+//        checkDefaultFieldsVisibilityInForm()
     }
 
     static content = {
@@ -213,35 +213,35 @@ class AddSessionPage extends Page {
     }
 
 //    ASSERTIONS
-    void checkDefaultFieldsVisibilityInForm() {
-        assert sessionDateInput.isDisplayed()
-        assert postalCodeInput.isDisplayed()
-        assert cityInput.isDisplayed()
-        assert addressInput.isDisplayed()
-        assert additionalInformationInput.isDisplayed()
-        assert typeOfSpaceRadioButtons*.isDisplayed()
-        assert spaceForSession.isDisplayed()
-        assert levelDropDownIsDisplayed
-        assert productDropDownIsDisplayed
-        assert examinerSelectIsDisplayed
+    boolean checkDefaultFieldsVisibilityInForm() {
+        return sessionDateInput.isDisplayed() &&
+                postalCodeInput.isDisplayed() &&
+                cityInput.isDisplayed() &&
+                addressInput.isDisplayed() &&
+                additionalInformationInput.isDisplayed() &&
+                typeOfSpaceRadioButtons*.isDisplayed() &&
+                spaceForSession.isDisplayed() &&
+                levelDropDownIsDisplayed &&
+                productDropDownIsDisplayed &&
+                examinerSelectIsDisplayed
     }
 
-    void checkDefaultTitlesInForm() {
+    boolean checkDefaultTitlesInForm() {
         def data = CommonHelper.jsonToObject("src/test/resources/applicationData.json")
 
-        assert sessionFormTitle == data.sessionForm.formTitle
-        assert sessionDateTitle == data.sessionForm.date
-        assert postalCodeTitle == data.sessionForm.postalCode
-        assert cityTitle == data.sessionForm.city
-        assert addressTitle == data.sessionForm.address
-        assert additionalInformationTitle == data.sessionForm.additionalInformation
-        assert typeOfSpaceTitle == data.sessionForm.typeOfSpace
-        assert spaceForSessionTitle == data.sessionForm.amountOfSpace
-        assert levelSelectTitle == data.sessionForm.level
-        assert productSelectTitle == data.sessionForm.product
-        assert examinerSelectTitle == data.sessionForm.examiner
-        assert getCancelButtonText() == data.sessionForm.cancelButton
-        assert getSaveButtonText() == data.sessionForm.saveButton
+        return sessionFormTitle == data.sessionForm.formTitle &&
+                sessionDateTitle == data.sessionForm.date &&
+                postalCodeTitle == data.sessionForm.postalCode &&
+                cityTitle == data.sessionForm.city &&
+                addressTitle == data.sessionForm.address &&
+                additionalInformationTitle == data.sessionForm.additionalInformation &&
+                typeOfSpaceTitle == data.sessionForm.typeOfSpace &&
+                spaceForSessionTitle == data.sessionForm.amountOfSpace &&
+                levelSelectTitle == data.sessionForm.level &&
+                productSelectTitle == data.sessionForm.product &&
+                examinerSelectTitle == data.sessionForm.examiner &&
+                getCancelButtonText() == data.sessionForm.cancelButton &&
+                getSaveButtonText() == data.sessionForm.saveButton
     }
 
 }
