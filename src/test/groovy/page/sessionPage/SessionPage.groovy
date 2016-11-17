@@ -8,6 +8,8 @@ import geb.module.TextInput
 import geb.module.Textarea
 import helper.CommonHelper
 
+import java.text.MessageFormat
+
 class SessionPage extends Page {
 
     static url = "Session/AddSession"
@@ -49,6 +51,12 @@ class SessionPage extends Page {
         productSelectTitle { $(".form-group label", 7).text() }
         productDropDownIsDisplayed { $(".btn-group.bootstrap-select.show-tick.product").isDisplayed() }
         productSelect { $(".btn-group.bootstrap-select.show-tick.product select").module(MultipleSelect) }
+
+        selectedProducts {$(".productContainer.clearfix > div")}
+        selectedProductTitle ($(" > div > div:nth-of-type(1)"))
+        selectedProductAmount ($(" > div > div:nth-of-type(2)"))
+        selectedProductDeleteIcon ($(" > div > div:nth-of-type(3)"))
+        selectedProductWarningText ($(" > div > span"))
 
         examinerSelectTitle { $(".form-group label", 8).text() }
         examinerSelectIsDisplayed { $(".btn-group.bootstrap-select.form-control").isDisplayed() }
@@ -153,6 +161,14 @@ class SessionPage extends Page {
 
     ArrayList<String> getSelectedLevelsText() {
         return levelSelect.selectedText
+    }
+
+    int getAmountOfSelectedProducts(){
+        return selectedProducts*.size()
+    }
+
+    String getSelectedProductTitle(idx){
+        return selectedProducts.getAt(idx)
     }
 
     ArrayList<String> getProductsId() {
