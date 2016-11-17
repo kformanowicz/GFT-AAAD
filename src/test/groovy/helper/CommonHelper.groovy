@@ -9,7 +9,7 @@ import page.LoginPage
 class CommonHelper {
 
     static String jsonToString(String jsonLocation){
-        Scanner input = new Scanner(new File(jsonLocation))
+        Scanner input = new Scanner(new File(jsonLocation), 'utf-8')
         StringBuilder jsonObject = new StringBuilder()
         while(input.hasNextLine()){
             jsonObject.append(input.nextLine())
@@ -37,7 +37,7 @@ class CommonHelper {
     }
 
     static void logInAsUser(String user) {
-        def jsonParser = CommonHelper.jsonToObject('src\\test\\resources\\values.json')
+        def jsonParser = jsonToObject('src\\test\\resources\\values.json')
 
         LoginPage loginPage = new LoginPage()
         Browser browser = new Browser()
