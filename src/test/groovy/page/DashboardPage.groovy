@@ -36,5 +36,10 @@ class DashboardPage extends Page {
         def event = events.find { it.text() == eventTitle }
         event.click()
     }
+
+    boolean isSessionEntryPresent(date, city) {
+        //TODO: placeholder, to be implemented
+        return true;
+    }
 }
 

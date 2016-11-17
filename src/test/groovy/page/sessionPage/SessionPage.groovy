@@ -2,6 +2,7 @@ package page.sessionPage
 
 import geb.Page
 import geb.module.MultipleSelect
+import geb.navigator.Navigator
 import geb.module.RadioButtons
 import geb.module.Select
 import geb.module.TextInput
@@ -40,32 +41,32 @@ class SessionPage extends Page {
         typeOfSpaceTitle { $(".form-group label", 5).text() }
         typeOfSpaceRadioButtons { $("input", name: "SessionDto.PlaceManagement").module(RadioButtons) }
 
-        spaceForSessionTitle { $('.form-group.spacePerSession label\\"' ).text() }
+        spaceForSessionTitle { $('.form-group.spacePerSession label\\"').text() }
         spaceForSession { $("input", name: "SessionDto.SpaceForSession") }
 
         levelSelectTitle { $(".form-group label", 6).text() }
         levelDropDownIsDisplayed { $(".btn-group.bootstrap-select.show-tick.level").isDisplayed() }
-        levelSelect { $(".btn-group.bootstrap-select.show-tick.level select").module(MultipleSelect) }
+        levelSelect { $(".level .dropdown-menu.inner a") }
+        levelSelectExpandButton { $(".level > button.dropdown-toggle.btn-default") }
 
         productSelectTitle { $(".form-group label", 7).text() }
         productDropDownIsDisplayed { $(".btn-group.bootstrap-select.show-tick.product").isDisplayed() }
-        productSelect { $(".btn-group.bootstrap-select.show-tick.product select").module(MultipleSelect) }
+        productSelect { $(".product .dropdown-menu.inner a") }
+        productSelectExpandButton { $(".product > button.dropdown-toggle.btn-default") }
 
         examinerSelectTitle { $(".form-group label", 8).text() }
         examinerSelectIsDisplayed { $(".btn-group.bootstrap-select.form-control").isDisplayed() }
-        examinerSelect { $("#SessionDto_ExaminerId select").module(Select) }
+        examinerSelect { $("#SessionDto_ExaminerId") }
+        examinerSelectExpandButton { $("button.dropdown-toggle.btn-default[data-id]") }
 
         cancelButton { $(".Backoffice-buttonsContainerBottom button", 0) }
         saveButton { $(".btn-move-right > button") }
     }
 
 //    SETTERS
-    void setDate(String data) {
-        if (data == "today") {
-            setTodayDate()
-        } else {
-            sessionDateInput.text = data
-        }
+    void setDate(Date data) {
+        def dateString = data.format("dd.MM.yyyy") + " 09:00"
+        sessionDateInput.text = dateString
     }
 
     private void setTodayDate() {
@@ -98,21 +99,42 @@ class SessionPage extends Page {
     }
 
     void setLevel(ArrayList<String> data) {
-        if (levelSelect.size() > 0) {
-            levelSelect.selected = data
-        }
+        selectValuesInMultiselect(data, levelSelectExpandButton, levelSelect)
     }
 
     void setProductByName(ArrayList<String> data) {
-        if (productSelect.size() > 0) {
-            productSelect.selected = data
+        selectValuesInMultiselect(data, productSelectExpandButton, productSelect)
+    }
+
+    void selectValuesInMultiselect (ArrayList<String> data, Navigator expandButton, Navigator select) {
+        //required, otherwise the select options cannot be found by text
+        expandButton.click()
+        //for each of the elements to be selected
+        data.each { levelToSelect ->
+            waitFor { select.children().first().displayed }
+            //find select options (children of the select root) with matching text
+            select.children().find { levelOnPage ->
+                if (levelToSelect == levelOnPage.text()) {
+                    //if found, click the parent (anchor) of the element containing text (span)
+                    levelOnPage.parent().click()
+                    return true
+                }
+            }
         }
+        //cleanup - hide the select
+        expandButton.click()
     }
 
     void setExaminerByName(String data) {
-        if (examinerSelect.size() > 0) {
-            examinerSelect.selected = data
+        examinerSelectExpandButton.click()
+        waitFor { ${".btn-group.bootstrap-select.form-control.js-session-closed.open"} }
+        examinerSelect.children().find { examinerOption ->
+            if(examinerOption.text() == data) {
+                examinerOption.click()
+                return true
+            }
         }
+        examinerSelectExpandButton.click()
     }
 
 //    GETTERS
@@ -191,7 +213,7 @@ class SessionPage extends Page {
         saveButton.click()
     }
 
-    void handleForm(String date, String postalCode, String city, String address, String additionalInformation,
+    void handleForm(Date date, String postalCode, String city, String address, String additionalInformation,
                     String typeOfSpace, int amountOfSpace, ArrayList<String> level, ArrayList<String> product,
                     String examinerByName, boolean save = true) {
         setDate(date)
@@ -210,6 +232,13 @@ class SessionPage extends Page {
         } else {
             cancelForm()
         }
+    }
+
+    void createSessionForOneProductDateCity(Date date, String city) {
+        handleForm(date, "11-222", city, "ul. Degrengolady 4", "", null, 15,
+                ["Zaawansowany"],
+                ["ISTQB Advanced Level Test Analyst / Polski, Angielski"],
+                "GFT Poland1 Test", true)
     }
 
 //    ASSERTIONS
