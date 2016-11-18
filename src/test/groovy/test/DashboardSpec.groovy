@@ -3,7 +3,7 @@ package test
 import geb.spock.GebReportingSpec
 import helper.CommonHelper
 import page.DashboardPage
-import page.sessionPage.SessionPage
+import page.SessionPage
 
 
 class DashboardSpec extends GebReportingSpec {
