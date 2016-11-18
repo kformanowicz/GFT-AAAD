@@ -2,6 +2,7 @@ package page
 
 import geb.Page
 import page.module.EventModule
+import page.module.NavbarMenuModule
 import page.module.NavbarModule
 
 class DashboardPage extends Page {
@@ -22,6 +23,7 @@ class DashboardPage extends Page {
         events { calendar.find(".fc-event-container .fc-event") }
         openedEvent { $(".popover-bottom").module(EventModule) }
         navbar { $(".Navigation-list").module(NavbarModule) }
+        navbarMenu {$(".Navbar-menu").module(NavbarMenuModule)}
     }
 
     void addSession() {

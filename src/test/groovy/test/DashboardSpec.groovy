@@ -4,6 +4,7 @@ import geb.spock.GebReportingSpec
 import helper.CommonHelper
 import page.DashboardPage
 import page.AddSessionPage
+import page.MyProfilePage
 
 
 class DashboardSpec extends GebReportingSpec {
@@ -33,6 +34,14 @@ class DashboardSpec extends GebReportingSpec {
         then:
         $('h3').text().contains('Lorem Ipsum')
 
+    }
+
+    def "It's possible to open 'Mój profil' page"(){
+        when:
+        navbarMenu.goToMyProfile()
+
+        then:
+        at MyProfilePage
     }
 
 }
