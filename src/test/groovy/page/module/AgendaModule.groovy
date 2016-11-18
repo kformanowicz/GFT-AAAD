@@ -7,6 +7,8 @@ import geb.navigator.Navigator
 class AgendaModule extends Module{
     static content = {
         dateAndPlace {$("h5").text()}
+        sessionHour {$(".Agenda-hourSpan").text()}
+
         freePlaces {$(".Agenda-groupFreePlaces > div", 1).text()}
         groupRegistrationButton {$(".Agenda-groupBtnContainer")}
         exams {$("tr").moduleList(ExamModule)}
@@ -14,6 +16,10 @@ class AgendaModule extends Module{
 
     String getNameAndPlace(){
         return dateAndPlace
+    }
+
+    String getHour() {
+        return sessionHour
     }
 
     Navigator getExamByName(name) {
