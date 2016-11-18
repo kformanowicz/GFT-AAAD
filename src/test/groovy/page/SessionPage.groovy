@@ -1,4 +1,4 @@
-package page.sessionPage
+package page
 
 import geb.Page
 import geb.module.MultipleSelect
@@ -6,7 +6,8 @@ import geb.module.RadioButtons
 import geb.module.Select
 import geb.module.TextInput
 import geb.module.Textarea
-import helper.CommonHelper
+import page.module.SelectedProductModule
+
 
 class SessionPage extends Page {
 
@@ -14,8 +15,7 @@ class SessionPage extends Page {
 
     static at = {
         title == "- ExamPlanner"
-        checkDefaultTitlesInForm()
-//        checkDefaultFieldsVisibilityInForm()
+        $(".col-sm-15.col-sm-offset-8.clearfix").isDisplayed()
     }
 
     static content = {
@@ -50,6 +50,7 @@ class SessionPage extends Page {
         productSelectTitle { $(".form-group label", 7).text() }
         productDropDownIsDisplayed { $(".btn-group.bootstrap-select.show-tick.product").isDisplayed() }
         productSelect { $(".btn-group.bootstrap-select.show-tick.product select").module(MultipleSelect) }
+        selectedProducts {$(".productContainer.clearfix").moduleList(SelectedProductModule)}
 
         examinerSelectTitle { $(".form-group label", 8).text() }
         examinerSelectIsDisplayed { $(".btn-group.bootstrap-select.form-control").isDisplayed() }
@@ -210,38 +211,6 @@ class SessionPage extends Page {
         } else {
             cancelForm()
         }
-    }
-
-//    ASSERTIONS
-    boolean checkDefaultFieldsVisibilityInForm() {
-        return sessionDateInput.isDisplayed() &&
-                postalCodeInput.isDisplayed() &&
-                cityInput.isDisplayed() &&
-                addressInput.isDisplayed() &&
-                additionalInformationInput.isDisplayed() &&
-                typeOfSpaceRadioButtons*.isDisplayed() &&
-                spaceForSession.isDisplayed() &&
-                levelDropDownIsDisplayed &&
-                productDropDownIsDisplayed &&
-                examinerSelectIsDisplayed
-    }
-
-    boolean checkDefaultTitlesInForm() {
-        def data = CommonHelper.jsonToObject("src/test/resources/applicationData.json")
-
-        return sessionFormTitle == data.sessionForm.formTitle &&
-                sessionDateTitle == data.sessionForm.date &&
-                postalCodeTitle == data.sessionForm.postalCode &&
-                cityTitle == data.sessionForm.city &&
-                addressTitle == data.sessionForm.address &&
-                additionalInformationTitle == data.sessionForm.additionalInformation &&
-                typeOfSpaceTitle == data.sessionForm.typeOfSpace &&
-                spaceForSessionTitle == data.sessionForm.amountOfSpace &&
-                levelSelectTitle == data.sessionForm.level &&
-                productSelectTitle == data.sessionForm.product &&
-                examinerSelectTitle == data.sessionForm.examiner &&
-                getCancelButtonText() == data.sessionForm.cancelButton &&
-                getSaveButtonText() == data.sessionForm.saveButton
     }
 
 }
