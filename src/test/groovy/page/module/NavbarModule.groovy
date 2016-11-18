@@ -10,4 +10,20 @@ class NavbarModule extends Module {
         session { $(".navItem-Session") }
         product { $(".navItem-Products") }
     }
+
+    void goToDashboard(){
+        dashboard.click()
+    }
+
+    void goToRegistrationList(){
+        registration.click()
+    }
+
+    void goToAddSession(){
+        session.click()
+    }
+
+    void goToProductsList(){
+        product.click()
+    }
 }
