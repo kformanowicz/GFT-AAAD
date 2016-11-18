@@ -9,6 +9,7 @@ class SessionPage extends Page{
         backToDashboardButton { $(".Backoffice-backButton", href: "/gftpl/Dashboard/Index") }
         deleteButton { $("button.js-session-delete") }
         sidebar { $(".Sidebar-left").module(SidebarModule) }
+        activateSessionInput {$("input.js-popover")}
     }
 
     void goBackToDashboard() {
@@ -37,6 +38,10 @@ class SessionPage extends Page{
 
     String getSessionStatus() {
         return sidebar.sessionStatus
+    }
+
+    void activateSession(){
+        withConfirm(true) {activateSessionInput.click()}
     }
 
 }
