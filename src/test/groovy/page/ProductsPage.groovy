@@ -10,6 +10,7 @@ import page.module.ProductModule
 
 class ProductsPage extends Page {
 
+    static url = 'Products/List'
     static at = {
         $("h3").text() == "Produkty"
     }
