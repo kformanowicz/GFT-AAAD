@@ -2,7 +2,7 @@ package test
 
 import geb.spock.GebReportingSpec
 import helper.CommonHelper
-import page.sessionPage.SessionPage
+import page.SessionPage
 
 class SessionSpec extends GebReportingSpec {
 

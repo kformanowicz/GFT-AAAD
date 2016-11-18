@@ -1,4 +1,4 @@
-package page.sessionPage
+package page
 
 import geb.Page
 import geb.module.MultipleSelect
@@ -53,10 +53,10 @@ class SessionPage extends Page {
         productSelect { $(".btn-group.bootstrap-select.show-tick.product select").module(MultipleSelect) }
 
         selectedProducts {$(".productContainer.clearfix > div")}
-        selectedProductTitle ($(" > div > div:nth-of-type(1)"))
-        selectedProductAmount ($(" > div > div:nth-of-type(2)"))
-        selectedProductDeleteIcon ($(" > div > div:nth-of-type(3)"))
-        selectedProductWarningText ($(" > div > span"))
+        selectedProductTitle {$(" > div > div:nth-of-type(1)")}
+        selectedProductAmount {$(" > div > div:nth-of-type(2)")}
+        selectedProductDeleteIcon {$(" > div > div:nth-of-type(3)")}
+        selectedProductWarningText {$(" > div > span")}
 
         examinerSelectTitle { $(".form-group label", 8).text() }
         examinerSelectIsDisplayed { $(".btn-group.bootstrap-select.form-control").isDisplayed() }
