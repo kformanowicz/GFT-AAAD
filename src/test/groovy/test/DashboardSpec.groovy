@@ -3,7 +3,7 @@ package test
 import geb.spock.GebReportingSpec
 import helper.CommonHelper
 import page.DashboardPage
-import page.SessionPage
+import page.AddSessionPage
 
 
 class DashboardSpec extends GebReportingSpec {
@@ -23,10 +23,10 @@ class DashboardSpec extends GebReportingSpec {
         addSession()
 
         then:
-        at SessionPage
+        at AddSessionPage
     }
 
-    def "clicking on 'Dodaj zgłoszenie' redirects to dashboard"() {
+    def "clicking on 'Dodaj zgłoszenie' redirects to homepage"() {
         when:
         register()
 

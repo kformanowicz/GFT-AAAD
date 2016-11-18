@@ -2,10 +2,11 @@ package test
 
 import geb.spock.GebReportingSpec
 import helper.CommonHelper
-import page.SessionPage
+import page.AddSessionPage
 import spock.lang.Ignore
 
-class SessionSpec extends GebReportingSpec {
+
+class AddSessionSpec extends GebReportingSpec {
 
     def setup() {
         CommonHelper.logInAsUser1()
@@ -15,7 +16,7 @@ class SessionSpec extends GebReportingSpec {
 
     def "Should be visible default fields in form"() {
         when: "i open add new Session page"
-        to SessionPage
+        to AddSessionPage
 
         then: "i see all default fields in form"
         sessionDateInput.isDisplayed()
@@ -35,7 +36,7 @@ class SessionSpec extends GebReportingSpec {
         def data = CommonHelper.jsonToObject("src/test/resources/applicationData.json")
 
         when: "i open add new Session page"
-        to SessionPage
+        to AddSessionPage
 
         then: "i see valid titles"
         sessionFormTitle == data.sessionForm.formTitle
@@ -56,7 +57,7 @@ class SessionSpec extends GebReportingSpec {
     @Ignore
     def "Should handle session form"() {
         given: "i am on the add new session page"
-        to SessionPage
+        to AddSessionPage
 
         when: "i handle new session form"
         handleForm("today", "11-111", "Address", "additional Information", "Dla sesji", 2, ["Podstawowy"],
