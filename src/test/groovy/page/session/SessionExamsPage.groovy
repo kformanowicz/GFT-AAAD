@@ -1,7 +1,5 @@
-package page
+package page.session
 
-import com.sun.jna.StringArray
-import geb.Page
 import geb.navigator.Navigator
 import page.module.ExamItemModule
 
