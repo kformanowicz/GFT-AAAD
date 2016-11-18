@@ -5,6 +5,7 @@ import helper.CommonHelper
 import page.DashboardPage
 import page.AddSessionPage
 import page.MyProfilePage
+import spock.lang.Ignore
 
 
 class DashboardSpec extends GebReportingSpec {
@@ -42,6 +43,15 @@ class DashboardSpec extends GebReportingSpec {
 
         then:
         at MyProfilePage
+    }
+
+    @Ignore
+    def "It's possible to delete an exam session scheduled for next month"(){
+        when:
+        sleep(1)
+
+        then:
+        sleep(1)
     }
 
 }
