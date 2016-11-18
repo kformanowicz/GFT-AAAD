@@ -34,19 +34,19 @@ class SessionExamsPage extends SessionPage {
     }
 
     String[] getAllExamsForBasicLevel(){
-        return basicLevelExams.collect { it.getExamName()}
+        return basicLevelExams*.getExamName()
     }
 
     String[] getAllExamsForAdvancedLevel(){
-        return advancedLevelExams.collect { it.getExamName()}
+        return advancedLevelExams*.getExamName()
     }
 
     String[] getAllExamsForExpertLevel(){
-        return expertLevelExams.collect { it.getExamName()}
+        return expertLevelExams*.getExamName()
     }
 
     String[] getAllExamsForOtherLevel(){
-        return otherLevelExams.collect { it.getExamName()}
+        return otherLevelExams*.getExamName()
     }
 
     void turnOffRegistrationForExam(String examName){
