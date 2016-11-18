@@ -3,6 +3,7 @@ package test
 import geb.spock.GebReportingSpec
 import helper.CommonHelper
 import page.SessionPage
+import spock.lang.Ignore
 
 class SessionSpec extends GebReportingSpec {
 
@@ -12,11 +13,11 @@ class SessionSpec extends GebReportingSpec {
 
     def cleanup() {}
 
-    def "Should be visible all fields in form"() {
-        when:
+    def "Should be visible default fields in form"() {
+        when: "i open add new Session page"
         to SessionPage
 
-        then:
+        then: "i see all default fields in form"
         sessionDateInput.isDisplayed()
         postalCodeInput.isDisplayed()
         cityInput.isDisplayed()
@@ -29,12 +30,14 @@ class SessionSpec extends GebReportingSpec {
         examinerSelectIsDisplayed
     }
 
-    def "Should be visible all correct titles in form"() {
-        when:
-        to SessionPage
+    def "Should be visible default titles in form"() {
+        given:
         def data = CommonHelper.jsonToObject("src/test/resources/applicationData.json")
 
-        then:
+        when: "i open add new Session page"
+        to SessionPage
+
+        then: "i see valid titles"
         sessionFormTitle == data.sessionForm.formTitle
         sessionDateTitle == data.sessionForm.date
         postalCodeTitle == data.sessionForm.postalCode
@@ -48,6 +51,21 @@ class SessionSpec extends GebReportingSpec {
         examinerSelectTitle == data.sessionForm.examiner
         getCancelButtonText() == data.sessionForm.cancelButton
         getSaveButtonText() == data.sessionForm.saveButton
+    }
+
+    @Ignore
+    def "Should handle session form"() {
+        given: "i am on the add new session page"
+        to SessionPage
+
+        when: "i handle new session form"
+        handleForm("today", "11-111", "Address", "additional Information", "Dla sesji", 2, ["Podstawowy"],
+                ["ISTQB Foundation Level / Polski, Angielski"], "GFT Poland1 Test", false)
+
+        then: "i should have valid chosen data"
+        selectedProducts.products.size() == 1
+        selectedProducts.productTitle*.text() == ["ISTQB Foundation Level / Polski, Angielski"]
+        selectedProducts.productAmount*.text() == ["0"]
     }
 
 }
