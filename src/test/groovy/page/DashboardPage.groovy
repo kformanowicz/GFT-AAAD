@@ -2,6 +2,7 @@ package page
 
 import geb.Page
 import page.module.EventModule
+import page.module.NavbarMenuModule
 import page.module.NavbarModule
 
 class DashboardPage extends Page {
@@ -14,14 +15,18 @@ class DashboardPage extends Page {
     }
 
     static content = {
-        addSessionButton { $("a", href: "/gftpl/Session/AddSession") }
-        registerButton { $("a", href: "/gftpl") }
+        addSessionButton { $("a.btn", href: "/gftpl/Session/AddSession") }
+        registerButton { $("a.btn", href: "/gftpl") }
         todayButton { $("button", text: "Dziś") }
         registeredTable { $("#productList") }
         calendar { $("#calendar") }
         events { calendar.find(".fc-event-container .fc-event") }
         openedEvent { $(".popover-bottom").module(EventModule) }
         navbar { $(".Navigation-list").module(NavbarModule) }
+        navbarMenu { $(".Navbar-menu").module(NavbarMenuModule) }
+        nextMonthButton { $(".fc-next-button") }
+        previousMonthButton { $(".fc-prev-button") }
+        currentMonth {$("h2").text()}
     }
 
     void addSession() {
@@ -41,5 +46,28 @@ class DashboardPage extends Page {
         //TODO: placeholder, to be implemented
         return true;
     }
-}
 
+    void assertElementsDisplayed() {
+        assert addSessionButton.displayed
+        assert registerButton.displayed
+        assert todayButton.displayed
+        assert registeredTable.displayed
+        assert calendar.displayed
+    }
+
+    void goToNextMonth() {
+        nextMonthButton.click()
+    }
+
+    void goToPreviousMonth() {
+        previousMonthButton.click()
+    }
+
+    void goToToday() {
+        todayButton.click()
+    }
+
+    String getCurrentMonth(){
+        return currentMonth
+    }
+}

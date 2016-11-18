@@ -1,4 +1,4 @@
-package page.sessionPage
+package page
 
 import geb.Page
 import geb.module.MultipleSelect
@@ -7,16 +7,16 @@ import geb.module.RadioButtons
 import geb.module.Select
 import geb.module.TextInput
 import geb.module.Textarea
-import helper.CommonHelper
+import page.module.SelectedProductModule
 
-class SessionPage extends Page {
+
+class AddSessionPage extends Page {
 
     static url = "Session/AddSession"
 
     static at = {
         title == "- ExamPlanner"
-        checkDefaultTitlesInForm()
-        checkDefaultFieldsVisibilityInForm()
+        $(".col-sm-15.col-sm-offset-8.clearfix").isDisplayed()
     }
 
     static content = {
@@ -53,6 +53,7 @@ class SessionPage extends Page {
         productDropDownIsDisplayed { $(".btn-group.bootstrap-select.show-tick.product").isDisplayed() }
         productSelect { $(".product .dropdown-menu.inner a") }
         productSelectExpandButton { $(".product > button.dropdown-toggle.btn-default") }
+        selectedProducts {$(".productContainer.clearfix").moduleList(SelectedProductModule)}
 
         examinerSelectTitle { $(".form-group label", 8).text() }
         examinerSelectIsDisplayed { $(".btn-group.bootstrap-select.form-control").isDisplayed() }
@@ -272,5 +273,4 @@ class SessionPage extends Page {
         assert getCancelButtonText() == data.sessionForm.cancelButton
         assert getSaveButtonText() == data.sessionForm.saveButton
     }
-
 }
