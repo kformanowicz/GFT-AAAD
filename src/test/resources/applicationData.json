@@ -1,5 +1,5 @@
 {
-  "sessionForm" : {
+  "sessionForm": {
     "formTitle": "Dodaj Sesję",
     "date": "Data sesji",
     "postalCode": "Kod Pocztowy",
@@ -13,5 +13,51 @@
     "examiner": "Egzaminator",
     "cancelButton": "Anuluj",
     "saveButton": "Zapisz sesję"
+  },
+  "individualRegistration": {
+    "formTitle": "Rejestracja indywidualna",
+    "baseForm": {
+      "language": "Język egzaminu",
+      "languageOptions": {
+        "poland": "Polski",
+        "english": "Angielski"
+      },
+      "product": "Preferowana forma egzaminu",
+      "productOptions": {
+        "paper": "papierowa",
+        "electronic": "elektroniczna"
+      },
+      "certificateDataMessage": "Uzupełnij dane na temat posiadanego certyfikatu",
+      "certificate": "Numer certyfikatu",
+      "data": "Data wystawienia certyfikatu",
+      "certificateProviders": "Wystawca certyfikatu",
+      "submitButton": "Dane kontaktowe"
+    },
+    "contactForm": {
+      "name": "Imię",
+      "surname": "Nazwisko",
+      "email": "Adres e-mail",
+      "phone": "Telefon kontaktowy (opcjonalnie)",
+      "submitButton": "Dane do wysłania",
+      "backButton": "Dane podstawowe"
+    },
+    "certificateForm": {
+      "name": "Imię",
+      "surname": "Nazwisko",
+      "postalCode": "Kod Pocztowy",
+      "city": "Miasto",
+      "address": "Adres",
+      "additionalInformation": "Informacje dodatkowe (opcjonalnie)",
+      "invoiceTypesTitle": "",
+      "invoiceTypes": {
+        "none": "Nie chcę faktury VAT",
+        "electronic": "Faktura VAT elektroniczna",
+        "paper": "Faktura VAT papierowa"
+      },
+      "privacyPolicy": "Wyrażam zgodę na przetwarzanie danych osobowych przez Stowarzyszenie Jakości Systemów Informatycznych z siedzibą w Warszawie przy ul. Poznańskiej 16 lok. 4 i wykorzystywanie ich dla celów organizacji i realizacji egzaminu zgodnie z ustawą z dnia 29.08.1997 r. o ochronie danych osobowych (tekst jednolity: Dz. U. 2002 r. Nr 101 poz 926, ze zm.)",
+      "marketingPolicy": "Wyrażam zgodę na przetwarzanie moich danych osobowych przez Stowarzyszenie Jakości Systemów Informatycznych z siedzibą w Warszawie przy ul. Poznańskiej 16 lok. 4 oraz na udostępnianie ich innym podmiotom współpracującymi z SJSI, w celach marketingowych i statystycznych oraz na otrzymywanie informacji handlowej drogą elektroniczną, zgodnie z ustawą z dnia 29.08.1997 o ochronie danych osobowych (tekst jednolity: Dz.U. 2002 r. Nr 101 poz. 926, ze zm.). (opcjonalnie)",
+      "submitButton": "Zarejestruj się",
+      "backButton": "Dane kontaktowe"
+    }
   }
 }

@@ -4,6 +4,8 @@ import geb.Page
 
 class ExamPlannerHomePage extends Page {
 
+    static url = ""
+
     static at = { title == "- ExamPlanner" }
 
     static content = {
