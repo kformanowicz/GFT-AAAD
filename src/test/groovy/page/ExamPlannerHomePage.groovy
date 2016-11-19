@@ -2,7 +2,7 @@ package page
 
 import geb.Page
 import geb.navigator.Navigator
-import page.module.AgendaModule
+import page.module.homePage.AgendaModule
 
 class ExamPlannerHomePage extends Page {
 

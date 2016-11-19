@@ -6,7 +6,7 @@ import geb.module.RadioButtons
 import geb.module.Select
 import geb.module.TextInput
 import geb.module.Textarea
-import page.module.SelectedProductModule
+import page.module.addSessionPage.SelectedProductModule
 
 
 class AddSessionPage extends Page {

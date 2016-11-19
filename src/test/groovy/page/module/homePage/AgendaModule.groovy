@@ -1,8 +1,7 @@
-package page.module
+package page.module.homePage
 
 import geb.Module
 import geb.navigator.Navigator
-
 
 class AgendaModule extends Module{
     static content = {

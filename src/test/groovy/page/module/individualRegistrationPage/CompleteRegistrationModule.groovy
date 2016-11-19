@@ -1,4 +1,4 @@
-package page.module.individualRegistration
+package page.module.individualRegistrationPage
 
 import geb.Module
 

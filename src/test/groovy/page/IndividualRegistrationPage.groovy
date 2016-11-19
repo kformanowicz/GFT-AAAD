@@ -1,10 +1,10 @@
 package page
 
 import geb.Page
-import page.module.individualRegistration.BaseDataFormModule
-import page.module.individualRegistration.CertificateDataFormModule
-import page.module.individualRegistration.CompleteRegistrationModule
-import page.module.individualRegistration.ContactDataFormModule
+import page.module.individualRegistrationPage.BaseDataFormModule
+import page.module.individualRegistrationPage.CertificateDataFormModule
+import page.module.individualRegistrationPage.CompleteRegistrationModule
+import page.module.individualRegistrationPage.ContactDataFormModule
 
 
 class IndividualRegistrationPage extends Page {
