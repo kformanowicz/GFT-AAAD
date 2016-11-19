@@ -1,4 +1,4 @@
-package page
+package page.session
 
 
 class SessionDetailsPage extends SessionPage {

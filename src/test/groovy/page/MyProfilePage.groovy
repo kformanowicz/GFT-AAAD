@@ -7,6 +7,8 @@ import page.module.NavbarModule
 
 
 class MyProfilePage extends Page {
+
+    static url = "Dashboard/UserProfileEdit"
     static at = {
         $("h3").text() == "Mój profil"
     }

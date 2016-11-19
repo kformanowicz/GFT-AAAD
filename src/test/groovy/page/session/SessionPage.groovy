@@ -1,4 +1,4 @@
-package page
+package page.session
 
 import geb.Page
 import page.module.SidebarModule
