@@ -5,7 +5,7 @@ import geb.module.TextInput
 class GroupRegistrationPageUsers extends RegistrationPage {
     static at = {
         getHeader() == "Rejestracja grupowa na termin"
-        $(".Registration-products .radio input", 0).displayed
+//        $(".Registration-products .radio input", 0).displayed
     }
 
     static content = {
@@ -49,13 +49,13 @@ class GroupRegistrationPageUsers extends RegistrationPage {
         }
     }
 
-    void accept() {
+    def accept() {
         forwardButton.click()
     }
 
-    void fillAndSubmitFormSingleUser(String name, String surname, String email, String phone, String examName, boolean setPolish = true,
-                                     boolean setPaper = true, String certificateNumber = null, String certificateDate = null,
-                                     String certificateProvider = null, accept = true) {
+    def fillAndSubmitFormSingleUser(String name, String surname, String email, String phone, String examName,
+                                    boolean setPolish = true, boolean setPaper = true, String certificateNumber = null,
+                                    String certificateDate = null, String certificateProvider = null, accept = true) {
         nameInput.text = name
         lastNameInput.text = surname
         emailInput.text = email
@@ -79,7 +79,7 @@ class GroupRegistrationPageUsers extends RegistrationPage {
         }
     }
 
-    void fillAndSubmitFormMultiUsers(Object usersData) {
+    def fillAndSubmitFormMultiUsers(Object usersData) {
         usersData.each {
             fillAndSubmitFormSingleUser(it.name, it.surname, it.email, it.phone, it.examName, it.setPolish, it.setPaper,
                     it.certificateNumber, it.certificateDate, it.certificateProvider, false)

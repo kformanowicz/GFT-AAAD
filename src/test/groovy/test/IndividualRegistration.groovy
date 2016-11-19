@@ -5,16 +5,21 @@ import helper.CommonHelper
 import org.openqa.selenium.By
 import page.ExamPlannerHomePage
 import page.IndividualRegistrationPage
+import page.registration.GroupRegistrationCertificateData
+import page.registration.GroupRegistrationContactData
+import page.registration.GroupRegistrationPageUsers
+import page.registration.RegistrationCompletePage
+import spock.lang.Ignore
 
 
 class IndividualRegistration extends GebReportingSpec {
 
     def appData = CommonHelper.jsonToObject("src/test/resources/applicationData.json")
 
-    def setup(){
+    def setup() {
     }
 
-    def cleanup(){
+    def cleanup() {
     }
 
     def "As a user I want to register to exam in order to participate in it (Foundation certificate)"() {
@@ -29,7 +34,7 @@ class IndividualRegistration extends GebReportingSpec {
         at IndividualRegistrationPage
 
         and: "i see all common elements"
-        sleep(1000)
+        waitFor { getRegistrationImageVisibility }
         getRegistrationImageVisibility == true
         getRegistrationTitle == appData.individualRegistration.formTitle
         getCalendarIconVisibility == true
@@ -59,7 +64,7 @@ class IndividualRegistration extends GebReportingSpec {
         at IndividualRegistrationPage
 
         and: "i see all common elements"
-        sleep(1000)
+        waitFor { getRegistrationImageVisibility }
         getRegistrationImageVisibility == true
         getRegistrationTitle == appData.individualRegistration.formTitle
         getCalendarIconVisibility == true
@@ -77,11 +82,44 @@ class IndividualRegistration extends GebReportingSpec {
         completeRegistrationPage.getNextRegistrationButtonText() == "Zarejestruj się na kolejny egzamin"
     }
 
-    def "As a user I want to register group of user to exam in order they can participate in it"(){
+    @Ignore
+    def "As a user I want to register group of users to exam in order they can participate in it"() {
+        given: "i am on the home page"
+        to ExamPlannerHomePage
 
+        when: "i chose group registration"
+        //TODO
+        $(By.xpath("/html/body/div[2]/div/div/div[3]/div[8]/div[3]/div[3]/div[3]")).click()
+
+        then: "i see group registration form"
+        at GroupRegistrationPageUsers
+
+        and: "i fill the group form"
+//        TODO resolve examName error
+        fillAndSubmitFormMultiUsers({
+            [name : "name", surname: "surname", email: CommonHelper.getRandomEmail(),
+             phone: "123123123", examName: "ISTQB Agile Tester Extension"];
+            [name : "name", surname: "surname", email: CommonHelper.getRandomEmail(),
+             phone: "123123123", examName: "ISTQB Foundation Level"];
+        })
+
+        and: "i see contact registration form"
+        at GroupRegistrationContactData
+
+        and: "i fill the contact form"
+        fillAndSubmitForm("name", "surname", CommonHelper.getRandomEmail(), "123123123")
+
+        and: "i see certificate form"
+        at GroupRegistrationCertificateData
+
+        and: "i feel the certificate form"
+        fillAndSubmitForm("name", "surname", "11-111", "Krakow", "address", "add info")
+
+        expect: "i see confirmation page"
+        at RegistrationCompletePage
     }
 
-    def "As a user I want to register group of user to different exams in order they can participate in them"(){
+    def "As a user I want to register group of user to different exams in order they can participate in them"() {
 
     }
 }
