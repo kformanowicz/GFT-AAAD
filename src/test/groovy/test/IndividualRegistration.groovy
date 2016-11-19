@@ -9,8 +9,6 @@ import page.IndividualRegistrationPage
 
 class IndividualRegistration extends GebReportingSpec {
 
-    Random random = new Random()
-    private final String randomNumber = random.nextInt(100000000).toString()
     def appData = CommonHelper.jsonToObject("src/test/resources/applicationData.json")
 
     def setup(){
@@ -39,7 +37,7 @@ class IndividualRegistration extends GebReportingSpec {
 
         and: "i fill registration form"
         baseDataForm.fillBaseData("Polski", "elektroniczna")
-        contactDataForm.fillContactData("name", "surname", "email" + randomNumber + "@mail.pl", "123123123")
+        contactDataForm.fillContactData("name", "surname", CommonHelper.getRandomEmail(), "123123123")
         certificateDataForm.fillCertificateData("name", "surname", "11-111", "Krakow", "address", "add info", "none")
 
         expect: "i see confirmation message"
@@ -60,17 +58,17 @@ class IndividualRegistration extends GebReportingSpec {
         then: "i see individual registration form"
         at IndividualRegistrationPage
 
-        and: "i see all common elemetns"
+        and: "i see all common elements"
         sleep(1000)
         getRegistrationImageVisibility == true
         getRegistrationTitle == appData.individualRegistration.formTitle
         getCalendarIconVisibility == true
         getClockIconVisibility == true
-//        getCertificateDataMessage == appData.individualRegistration.baseForm.certificateDataMessage
+        baseDataForm.getCertificateDataMessage == appData.individualRegistration.baseForm.certificateDataMessage
 
         and: "i fill registration form"
         baseDataForm.fillBaseData("Angielski", "papierowa", "0123456789", "17.11.2016", "SJSI")
-        contactDataForm.fillContactData("name", "surname", "emailemai" + randomNumber + "@mail.pl", "123123123")
+        contactDataForm.fillContactData("name", "surname", CommonHelper.getRandomEmail(), "123123123")
         certificateDataForm.fillCertificateData("name", "surname", "11-111", "Krakow", "address", "add info", "none")
 
         expect: "i see confirmation message"
