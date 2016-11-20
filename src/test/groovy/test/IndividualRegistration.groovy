@@ -28,7 +28,8 @@ class IndividualRegistration extends GebReportingSpec {
 
         when: "i chose individual registration"
         //TODO
-        $(By.xpath("/html/body/div[2]/div/div/div[3]/div[8]/div[3]/div[2]/div[3]/table/tbody/tr[1]/td[3]")).click()
+//        registerIndividual("30 listopada 2016, Sopot", "ISTQB Foundation Level")
+        $(By.xpath("/html/body/div[2]/div/div/div[3]/div[6]/div[3]/div[2]/div[3]/table/tbody/tr[1]/td[3]")).click()
 
         then: "i see individual registration form"
         at IndividualRegistrationPage
@@ -58,7 +59,8 @@ class IndividualRegistration extends GebReportingSpec {
 
         when: "i chose individual registration"
         //TODO
-        $(By.xpath("/html/body/div[2]/div/div/div[3]/div[8]/div[3]/div[2]/div[4]/table/tbody/tr[1]/td[3]")).click()
+        //        registerIndividual("30 listopada 2016, Sopot", "ISTQB Advanced Level Technical Test Analyst")
+        $(By.xpath("/html/body/div[2]/div/div/div[3]/div[6]/div[3]/div[2]/div[4]/table/tbody/tr[1]/td[3]")).click()
 
         then: "i see individual registration form"
         at IndividualRegistrationPage
