@@ -4,7 +4,7 @@ import geb.spock.GebReportingSpec
 import helper.CommonHelper
 import page.AddSessionPage
 import page.DashboardPage
-import page.SessionDetailsPage
+import page.session.SessionDetailsPage
 import spock.lang.Ignore
 
 

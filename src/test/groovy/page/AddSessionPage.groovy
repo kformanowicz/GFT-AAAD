@@ -1,15 +1,12 @@
 package page
 
 import geb.Page
-import geb.module.MultipleSelect
 import geb.navigator.Navigator
 import geb.module.RadioButtons
-import geb.module.Select
 import geb.module.TextInput
 import geb.module.Textarea
-import org.openqa.selenium.Keys
 import page.module.SelectedProductModule
-
+import page.module.addSessionPage.SelectedProductModule
 
 class AddSessionPage extends Page {
 

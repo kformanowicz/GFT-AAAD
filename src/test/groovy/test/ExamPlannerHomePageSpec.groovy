@@ -4,7 +4,7 @@ import geb.spock.GebReportingSpec
 import page.ExamPlannerHomePage
 import page.LoginPage
 
-class ExamPlannerHomepageSpec extends GebReportingSpec {
+class ExamPlannerHomePageSpec extends GebReportingSpec {
 
     def setupSpec(){
         clearCookies()

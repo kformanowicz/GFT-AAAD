@@ -4,12 +4,13 @@ import geb.Page
 import geb.module.Select
 import geb.module.TextInput
 import geb.navigator.Navigator
-import page.module.NavbarModule
-import page.module.ProductModule
+import page.module.common.NavbarModule
+import page.module.productPage.ProductModule
 
 
 class ProductsPage extends Page {
 
+    static url = 'Products/List'
     static at = {
         $("h3").text() == "Produkty"
     }
