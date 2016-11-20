@@ -50,7 +50,6 @@ class IndividualRegistration extends GebReportingSpec {
         completeRegistrationPage.getThanksMessage == "Dziękujemy za zapisanie się na egzamin"
         completeRegistrationPage.getImageVisibility == true
         completeRegistrationPage.getNextRegistrationButtonText() == "Zarejestruj się na kolejny egzamin"
-
     }
 
     def "As a user I want to register to exam in order to participate in it (Advance certificate)"() {
@@ -87,7 +86,7 @@ class IndividualRegistration extends GebReportingSpec {
     @Ignore
     def "As a user I want to register group of users to exam in order they can participate in it"() {
         given: "i am on the home page"
-        via ExamPlannerHomePage
+        to ExamPlannerHomePage
 
         when: "i chose group registration"
         //TODO
@@ -125,7 +124,7 @@ class IndividualRegistration extends GebReportingSpec {
     @Ignore
     def "As a user I want to register group of users to different exams in order they can participate in them"() {
         given: "i am on the home page"
-        via ExamPlannerHomePage
+        to ExamPlannerHomePage
 
         when: "i chose group registration"
         //TODO
