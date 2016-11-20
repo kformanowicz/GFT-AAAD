@@ -3,10 +3,8 @@ package test
 import geb.spock.GebReportingSpec
 import helper.CommonHelper
 import page.AddSessionPage
-import page.DashboardPage
 import page.session.SessionDetailsPage
 import spock.lang.Ignore
-
 
 class AddSessionSpec extends GebReportingSpec {
 
@@ -73,10 +71,10 @@ class AddSessionSpec extends GebReportingSpec {
 
     def "As an admin I want to create exam session for one type of exam in order to prepare exam session"() {
         setup:
-        def calendar = new GregorianCalendar()
+        GregorianCalendar calendar = new GregorianCalendar()
         calendar.set(2016, 10, 30)  //results in setting date to 2016-11-30
-        def Date date = calendar.getTime()
-        def city = CommonHelper.getRandomCity()
+        Date date = calendar.getTime()
+        String city = CommonHelper.getRandomCity()
         to AddSessionPage
 
         when:
@@ -85,7 +83,6 @@ class AddSessionSpec extends GebReportingSpec {
         then:
         at(SessionDetailsPage)
         getCity == city
-//        getDate == date
 
         cleanup:
         if (page instanceof SessionDetailsPage) {
@@ -106,5 +103,30 @@ class AddSessionSpec extends GebReportingSpec {
 
         then: "i don`t see duplicate session message"
         !getDuplicateSessionMessageVisibility
+    }
+
+    def "As an admin I want to create exam session for few types of exam at the same exam level in order to prepare exam session"() {
+        setup:
+        GregorianCalendar calendar = new GregorianCalendar()
+        calendar.set(2016, 10, 30)  //results in setting date to 2016-11-30
+        Date date = calendar.getTime()
+        String city = CommonHelper.getRandomCity()
+        to AddSessionPage
+
+        when:
+        handleForm(date, "11-222", city, "ul. Degrengolady 4", "", null, 15, ["Zaawansowany"],
+                ["ISTQB Advanced Level Test Analyst / Polski, Angielski",
+                 "ISTQB Advanced Level Technical Test Analyst / Polski, Angielski",
+                 "ISTQB Advanced Level Test Manager / Polski, Angielski"],
+                "GFT Poland1 Test", true)
+
+        then:
+        at(SessionDetailsPage)
+        getCity == city
+
+        cleanup:
+        if (page instanceof SessionDetailsPage) {
+            page.deleteSession()
+        }
     }
 }

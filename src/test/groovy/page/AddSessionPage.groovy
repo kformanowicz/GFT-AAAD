@@ -235,7 +235,9 @@ class AddSessionPage extends Page {
         setTypeOfSpace(typeOfSpace)
         setAmountOfSpace(amountOfSpace)
         setLevel(level)
+        sleep(1000)
         setProductByName(product)
+        sleep(1000)
         setExaminerByName(examinerByName)
 
         if (save) {
