@@ -19,4 +19,16 @@ class SessionDetailsPage extends SessionPage {
         address { $(".col-sm-16.col-sm-offset-2 > div:nth-child(2) > div.BackofficeDetails-content").text() }
         additionalInfo { $(".col-sm-16.col-sm-offset-2 > div:nth-child(3) > div.BackofficeDetails-content").text() }
     }
+
+    String getSessionDate() {
+        return sessionDate;
+    }
+
+    String getSessionTime() {
+        return sessionTime;
+    }
+
+    String getCity() {
+        return city;
+    }
 }

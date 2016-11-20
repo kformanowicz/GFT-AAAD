@@ -20,11 +20,13 @@ class AddSessionPage extends Page {
     }
 
     static content = {
+        body { $(".container.body-content") }
         sessionForm { $(".col-sm-15.col-sm-offset-8.clearfix") }
         sessionFormTitle { $(".Backoffice-header.text-center h3").text() }
 
         sessionDateTitle { $(".form-group label", 0).text() }
         sessionDateInput { $("#SessionDto_Date").module(TextInput) }
+        sessionDateCalendarIcon { $("#datetimepicker > span.input-group-addon") }
 
         postalCodeTitle { $(".form-group label", 1).text() }
         postalCodeInput { $("#SessionDto_Location_PostalCode").module(TextInput) }
@@ -40,6 +42,8 @@ class AddSessionPage extends Page {
 
         typeOfSpaceTitle { $(".form-group label", 5).text() }
         typeOfSpaceRadioButtons { $("input", name: "SessionDto.PlaceManagement").module(RadioButtons) }
+        typeOfSpaceProductRadioButton {$("input#spacePerProduct")}
+        typeOfSpaceSessionRadioButton {$("input#spacePerSession")}
 
         spaceForSessionTitle { $('.form-group.spacePerSession label\\"').text() }
         spaceForSession { $("input", name: "SessionDto.SpaceForSession") }
@@ -67,8 +71,13 @@ class AddSessionPage extends Page {
 
 //    SETTERS
     void setDate(Date data) {
+        //click needed for populating the "Product" field as a workaround to a bug
+        //sessionDateCalendarIcon.click()
         def dateString = data.format("dd.MM.yyyy") + " 09:00"
         sessionDateInput.text = dateString
+        //sessionDateInput.firstElement().sendKeys("\t");
+        //unfocus
+        //body.click();
     }
 
     private void setTodayDate() {
@@ -77,27 +86,40 @@ class AddSessionPage extends Page {
 
     void setPostalCode(String data) {
         postalCodeInput.text = data
+        postalCodeInput.click();
+        body.click();
     }
 
     void setCity(String data) {
         cityInput.text = data
+        cityInput.click();
+        body.click();
     }
 
     void setAddress(String data) {
         addressInput.text = data
+        addressInput.click();
+        body.click();
     }
 
     void setAdditionalInformation(String data) {
         additionalInformationInput.text = data
+        additionalInformationInput.click();
+        body.click();
     }
 
-    void setTypeOfSpace(String data) {
-        typeOfSpaceRadioButtons.checked = data
+    void setTypeOfSpace(String data = "Dla sesji") {
+        if (data == "Dla sesji" || data == null) {
+            typeOfSpaceSessionRadioButton.click()
+        } else if (data == "Dla produktu") {
+            typeOfSpaceProductRadioButton.click()
+        }
     }
 
     void setAmountOfSpace(int data) {
         spaceForSession.value("")
         spaceForSession.value(data)
+        spaceForSession.click();
     }
 
     void setLevel(ArrayList<String> data) {

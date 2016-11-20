@@ -74,7 +74,7 @@ class AddSessionSpec extends GebReportingSpec {
     def "Should be able to create an exam session for one product" () {
         setup:
         def calendar = new GregorianCalendar()
-        calendar.set(2016, 10, 30)
+        calendar.set(2016, 10, 30)  //results in setting date to 2016-11-30
         def Date date = calendar.getTime()
         def city = "Wrocław"
         to AddSessionPage
@@ -84,7 +84,7 @@ class AddSessionSpec extends GebReportingSpec {
 
         then:
         assert page instanceof SessionDetailsPage
-        assert isSessionEntryPresent(date, city)
+        assert getCity() == city
+        assert getDate() == date
     }
-
 }
