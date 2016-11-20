@@ -3,6 +3,8 @@ package test
 import geb.spock.GebReportingSpec
 import helper.CommonHelper
 import page.AddSessionPage
+import page.DashboardPage
+import page.SessionDetailsPage
 import spock.lang.Ignore
 
 
@@ -67,6 +69,22 @@ class AddSessionSpec extends GebReportingSpec {
         selectedProducts.products.size() == 1
         selectedProducts.productTitle*.text() == ["ISTQB Foundation Level / Polski, Angielski"]
         selectedProducts.productAmount*.text() == ["0"]
+    }
+
+    def "Should be able to create an exam session for one product" () {
+        setup:
+        def calendar = new GregorianCalendar()
+        calendar.set(2016, 10, 30)
+        def Date date = calendar.getTime()
+        def city = "Wrocław"
+        to AddSessionPage
+
+        when:
+        createSessionForOneProductDateCity(date, city)
+
+        then:
+        assert page instanceof SessionDetailsPage
+        assert isSessionEntryPresent(date, city)
     }
 
 }

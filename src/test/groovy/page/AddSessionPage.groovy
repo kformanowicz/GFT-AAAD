@@ -57,8 +57,9 @@ class AddSessionPage extends Page {
 
         examinerSelectTitle { $(".form-group label", 8).text() }
         examinerSelectIsDisplayed { $(".btn-group.bootstrap-select.form-control").isDisplayed() }
-        examinerSelect { $("#SessionDto_ExaminerId") }
+        examinerSelect { $(".btn-group.bootstrap-select.form-control.js-session-closed .dropdown-menu.inner a") }
         examinerSelectExpandButton { $("button.dropdown-toggle.btn-default[data-id]") }
+        examinerSelectArea { $(".btn-group.bootstrap-select.form-control.js-session-closed.open") }
 
         cancelButton { $(".Backoffice-buttonsContainerBottom button", 0) }
         saveButton { $(".btn-move-right > button") }
@@ -107,7 +108,7 @@ class AddSessionPage extends Page {
         selectValuesInMultiselect(data, productSelectExpandButton, productSelect)
     }
 
-    void selectValuesInMultiselect (ArrayList<String> data, Navigator expandButton, Navigator select) {
+    void selectValuesInMultiselect(ArrayList<String> data, Navigator expandButton, Navigator select) {
         //required, otherwise the select options cannot be found by text
         expandButton.click()
         //for each of the elements to be selected
@@ -125,17 +126,15 @@ class AddSessionPage extends Page {
         //cleanup - hide the select
         expandButton.click()
     }
+    void selectValuesInSelect(String data, Navigator expandButton, Navigator select) {
+        ArrayList parameterList = new ArrayList();
+        parameterList.add(data);
+        selectValuesInMultiselect(parameterList, expandButton, select);
+    }
 
     void setExaminerByName(String data) {
-        examinerSelectExpandButton.click()
-        waitFor { ${".btn-group.bootstrap-select.form-control.js-session-closed.open"} }
-        examinerSelect.children().find { examinerOption ->
-            if(examinerOption.text() == data) {
-                examinerOption.click()
-                return true
-            }
-        }
-        examinerSelectExpandButton.click()
+        //waitFor { examinerSelectArea.displayed }
+        selectValuesInSelect(data, examinerSelectExpandButton, examinerSelect);
     }
 
 //    GETTERS
@@ -209,9 +208,13 @@ class AddSessionPage extends Page {
         cancelButton.click()
     }
 
-    void saveForm() {
+    void saveForm(boolean isTransitionToSessionDetailsExpected) {
         assert saveButton.isDisplayed()
-        saveButton.click()
+        if (isTransitionToSessionDetailsExpected) {
+            saveButton.click(SessionDetailsPage)
+        } else {
+            saveButton.click()
+        }
     }
 
     void handleForm(Date date, String postalCode, String city, String address, String additionalInformation,
@@ -229,7 +232,7 @@ class AddSessionPage extends Page {
         setExaminerByName(examinerByName)
 
         if (save) {
-            saveForm()
+            saveForm(true)
         } else {
             cancelForm()
         }
