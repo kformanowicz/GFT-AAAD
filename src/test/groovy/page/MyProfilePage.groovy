@@ -2,8 +2,8 @@ package page
 
 import geb.Page
 import geb.module.TextInput
-import page.module.NavbarMenuModule
-import page.module.NavbarModule
+import page.module.common.NavbarMenuModule
+import page.module.common.NavbarModule
 
 
 class MyProfilePage extends Page {

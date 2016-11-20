@@ -2,22 +2,22 @@ package helper
 
 import geb.Browser
 import groovy.json.JsonSlurper
-import groovy.json.internal.LazyMap
+import org.apache.commons.lang3.RandomStringUtils
 import page.LoginPage
 
 
 class CommonHelper {
 
-    static String jsonToString(String jsonLocation){
+    static String jsonToString(String jsonLocation) {
         Scanner input = new Scanner(new File(jsonLocation), 'utf-8')
         StringBuilder jsonObject = new StringBuilder()
-        while(input.hasNextLine()){
+        while (input.hasNextLine()) {
             jsonObject.append(input.nextLine())
         }
         return jsonObject.toString()
     }
 
-    static def jsonToObject(String jsonLocation){
+    static def jsonToObject(String jsonLocation) {
         String json = jsonToString(jsonLocation)
         def jsonSlurper = new JsonSlurper()
         def object = jsonSlurper.parseText(json)
@@ -43,5 +43,12 @@ class CommonHelper {
         Browser browser = new Browser()
         browser.to(loginPage)
         loginPage.logIn(jsonParser.users.get(user).login, jsonParser.users.get(user).password)
+    }
+
+    static String getRandomEmail() {
+        Random random = new Random()
+        String randomNumber = random.nextInt(100000000).toString()
+        String email = RandomStringUtils.randomAlphanumeric(10)
+        return email + randomNumber + "@mail.su"
     }
 }

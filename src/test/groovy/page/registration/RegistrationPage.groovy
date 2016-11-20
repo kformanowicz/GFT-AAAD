@@ -5,7 +5,7 @@ import geb.Page
 
 class RegistrationPage extends Page {
     static content = {
-        pageHeader { $("h3") }
+        pageHeader { $(".Register-header.clearfix h3") }
         sessionDate { $(".Register-info", 0).text() }
         sessionTime { $(".Register-info", 1).text() }
         registerSteps {$(".Register-steps")}

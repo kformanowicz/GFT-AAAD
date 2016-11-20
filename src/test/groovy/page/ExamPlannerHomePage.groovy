@@ -2,7 +2,7 @@ package page
 
 import geb.Page
 import geb.navigator.Navigator
-import page.module.AgendaModule
+import page.module.homePage.AgendaModule
 
 class ExamPlannerHomePage extends Page {
 
@@ -23,14 +23,14 @@ class ExamPlannerHomePage extends Page {
      * @return
      */
     Navigator getAgendaByDateAndPlace(String dateAndPlace) {
-        return agendas.find {it.getNameAndPlace() == dateAndPlace}
+        return agendas.find {it.getNameAndPlace().trim() == dateAndPlace}
     }
 
-    void registerGroup(dateAndPlace) {
+    void registerGroup(String dateAndPlace) {
         getAgendaByDateAndPlace(dateAndPlace).registerGroup()
     }
 
-    void registerIndividual(dateAndPlace, examName) {
+    void registerIndividual(String dateAndPlace, String examName) {
         getAgendaByDateAndPlace(dateAndPlace).registerToExam(examName)
     }
 }

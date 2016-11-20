@@ -10,27 +10,39 @@ import org.openqa.selenium.firefox.MarionetteDriver
 import org.openqa.selenium.phantomjs.PhantomJSDriver
 
 waiting {
-	timeout = 10
-	retryInterval = 0.2
+    timeout = 10
+    retryInterval = 0.2
 }
 
 environments {
-	
-	// run via “./gradlew chromeTest”
-	// See: http://code.google.com/p/selenium/wiki/ChromeDriver
-	chrome {
-		driver = { new ChromeDriver() }
-	}
-	
-	// run via “./gradlew firefoxTest”
-	// See: http://code.google.com/p/selenium/wiki/FirefoxDriver
-	firefox {
-		System.setProperty("webdriver.gecko.driver", "src/test/resources/geckodriver.exe")
-		driver = { new MarionetteDriver() }
-	}
+
+    // run via “./gradlew chromeTest”
+    // See: http://code.google.com/p/selenium/wiki/ChromeDriver
+    chrome {
+        driver = {
+            def driver = new ChromeDriver()
+            driver.manage().window().maximize()
+            return driver
+        }
+    }
+
+    // run via “./gradlew firefoxTest”
+    // See: http://code.google.com/p/selenium/wiki/FirefoxDriver
+    firefox {
+        System.setProperty("webdriver.gecko.driver", "src/test/resources/geckodriver.exe")
+        driver = {
+            def driver = new MarionetteDriver()
+            driver.manage().window().maximize()
+            return driver
+        }
+    }
 
     phantomJs {
-        driver = { new PhantomJSDriver() }
+        driver = {
+            def driver = new PhantomJSDriver()
+            driver.manage().window().maximize()
+            return driver
+        }
     }
 
 }

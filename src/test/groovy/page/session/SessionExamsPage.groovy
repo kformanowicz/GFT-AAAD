@@ -1,7 +1,7 @@
 package page.session
 
 import geb.navigator.Navigator
-import page.module.ExamItemModule
+import page.module.sessionExams.ExamItemModule
 
 
 class SessionExamsPage extends SessionPage {

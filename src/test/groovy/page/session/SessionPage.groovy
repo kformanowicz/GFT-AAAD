@@ -1,7 +1,7 @@
 package page.session
 
 import geb.Page
-import page.module.SidebarModule
+import page.module.sessionPage.SidebarModule
 
 class SessionPage extends Page{
 

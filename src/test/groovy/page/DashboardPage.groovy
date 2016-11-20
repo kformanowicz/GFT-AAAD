@@ -1,9 +1,9 @@
 package page
 
 import geb.Page
-import page.module.EventModule
-import page.module.NavbarMenuModule
-import page.module.NavbarModule
+import page.module.dashboardPage.EventModule
+import page.module.common.NavbarMenuModule
+import page.module.common.NavbarModule
 
 class DashboardPage extends Page {
     static url = "Dashboard/Index"
