@@ -4,7 +4,11 @@ import geb.spock.GebReportingSpec
 import page.ExamPlannerHomePage
 import page.LoginPage
 
-class ExamPlannerSpec extends GebReportingSpec {
+class ExamPlannerHomepageSpec extends GebReportingSpec {
+
+    def setupSpec(){
+        clearCookies()
+    }
 
     def "Correct header is displayed"() {
         when:
@@ -19,9 +23,9 @@ class ExamPlannerSpec extends GebReportingSpec {
         via ExamPlannerHomePage
 
         and:
-        loginButton.click()
+        clickLoginButton()
 
         then:
-         at LoginPage
+        waitFor {at LoginPage}
     }
 }

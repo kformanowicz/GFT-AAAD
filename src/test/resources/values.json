@@ -1,0 +1,16 @@
+{
+  "users" : {
+    "user1": {
+      "login": "gft.poland1@pgs-soft.com",
+      "password": "9dbiUZbDif"
+    },
+    "user2": {
+      "login": "gft.poland2@pgs-soft.com",
+      "password": "2GDchdvAGS"
+    },
+    "user3": {
+      "login": "gft.poland3@pgs-soft.com",
+      "password": "fHyXN7eTBN"
+    }
+  }
+}

@@ -1,0 +1,17 @@
+{
+  "sessionForm" : {
+    "formTitle": "Dodaj Sesję",
+    "date": "Data sesji",
+    "postalCode": "Kod Pocztowy",
+    "city": "Miasto",
+    "address": "Adres",
+    "additionalInformation": "Informacje dodatkowe (opcjonalnie)",
+    "typeOfSpace": "Wybierz metodę zarządzania miejscami",
+    "amountOfSpace": "Liczba miejsc",
+    "level": "Wybierz poziom",
+    "product": "Wybierz Produkt",
+    "examiner": "Egzaminator",
+    "cancelButton": "Anuluj",
+    "saveButton": "Zapisz sesję"
+  }
+}
