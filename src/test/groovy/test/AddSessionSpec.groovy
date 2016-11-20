@@ -76,7 +76,7 @@ class AddSessionSpec extends GebReportingSpec {
         def calendar = new GregorianCalendar()
         calendar.set(2016, 10, 30)  //results in setting date to 2016-11-30
         def Date date = calendar.getTime()
-        def city = "Wrocław"
+        def city = "Miśki Dolne"
         to AddSessionPage
 
         when:
@@ -86,5 +86,8 @@ class AddSessionSpec extends GebReportingSpec {
         assert page instanceof SessionDetailsPage
         assert getCity() == city
         assert getDate() == date
+
+        cleanup:
+        deleteSession()
     }
 }

@@ -15,20 +15,26 @@ class SessionDetailsPage extends SessionPage {
             $(".BackofficeDetails-column--hasBorderRight > div:nth-child(3) > .BackofficeDetails-content").text()
         }
         postalCode { $(".row > div:nth-child(1) > .BackofficeDetails-content").text() }
-        city { $(".col-sm-offset-2 > div.BackofficeDetails-content").text() }
+        city { $(".col-sm-offset-2 > div.BackofficeDetails-content") }
         address { $(".col-sm-16.col-sm-offset-2 > div:nth-child(2) > div.BackofficeDetails-content").text() }
         additionalInfo { $(".col-sm-16.col-sm-offset-2 > div:nth-child(3) > div.BackofficeDetails-content").text() }
+        deleteSessionButton { $(".js-session-delete") }
     }
 
     String getSessionDate() {
-        return sessionDate;
+        return sessionDate.toString();
     }
 
     String getSessionTime() {
-        return sessionTime;
+        return sessionTime.toString();
     }
 
     String getCity() {
-        return city;
+         return city.text();
+    }
+
+    void deleteSession() {
+        deleteSessionButton.click()
+        driver.switchTo().alert().accept()
     }
 }
