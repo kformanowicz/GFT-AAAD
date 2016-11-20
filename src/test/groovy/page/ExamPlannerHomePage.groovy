@@ -11,7 +11,7 @@ class ExamPlannerHomePage extends Page {
     static content = {
         header { $(".Navigation-entry span").text() }
         loginButton { $("#loginLink") }
-        agendas { $(".Agenda-container").children().moduleList(AgendaModule) }
+        agendas { $(".Agenda-container").find(".Agenda-dateContainer").moduleList(AgendaModule) }
     }
 
     void clickLoginButton() {
@@ -23,6 +23,7 @@ class ExamPlannerHomePage extends Page {
      * @return
      */
     Navigator getAgendaByDateAndPlace(String dateAndPlace) {
+        println(agendas*.getNameAndPlace());
         return agendas.find {it.getNameAndPlace().trim() == dateAndPlace}
     }
 

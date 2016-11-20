@@ -10,7 +10,7 @@ class AgendaModule extends Module{
 
         freePlaces {$(".Agenda-groupFreePlaces > div", 1).text()}
         groupRegistrationButton {$(".Agenda-groupBtnContainer")}
-        exams {$("tr").moduleList(ExamModule)}
+        exams {$("tr").not(".u-hideOnDesktop--tableRow").moduleList(ExamModule)}
     }
 
     String getNameAndPlace(){
