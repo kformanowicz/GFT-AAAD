@@ -1,12 +1,12 @@
 package page
 
 import geb.Page
-import geb.navigator.Navigator
 import geb.module.RadioButtons
 import geb.module.TextInput
 import geb.module.Textarea
-import page.module.SelectedProductModule
+import geb.navigator.Navigator
 import page.module.addSessionPage.SelectedProductModule
+import page.session.SessionDetailsPage
 
 class AddSessionPage extends Page {
 
@@ -64,6 +64,8 @@ class AddSessionPage extends Page {
 
         cancelButton { $(".Backoffice-buttonsContainerBottom button", 0) }
         saveButton { $(".btn-move-right > button") }
+
+        getDuplicateSessionMessageVisibility { $(".field-validation-error.text-danger").isDisplayed() }
     }
 
 //    SETTERS
@@ -222,7 +224,7 @@ class AddSessionPage extends Page {
         }
     }
 
-    void handleForm(Date date, String postalCode, String city, String address, String additionalInformation,
+    def handleForm(Date date, String postalCode, String city, String address, String additionalInformation,
                     String typeOfSpace, int amountOfSpace, ArrayList<String> level, ArrayList<String> product,
                     String examinerByName, boolean save = true) {
         setDate(date)
@@ -243,42 +245,12 @@ class AddSessionPage extends Page {
         }
     }
 
-    void createSessionForOneProductDateCity(Date date, String city) {
+    def createSessionForOneProductDateCity(Date date, String city) {
+        sleep(1000)
         handleForm(date, "11-222", city, "ul. Degrengolady 4", "", null, 15,
                 ["Zaawansowany"],
                 ["ISTQB Advanced Level Test Analyst / Polski, Angielski"],
                 "GFT Poland1 Test", true)
     }
 
-//    ASSERTIONS
-    void checkDefaultFieldsVisibilityInForm() {
-        assert sessionDateInput.isDisplayed()
-        assert postalCodeInput.isDisplayed()
-        assert cityInput.isDisplayed()
-        assert addressInput.isDisplayed()
-        assert additionalInformationInput.isDisplayed()
-        assert typeOfSpaceRadioButtons*.isDisplayed()
-        assert spaceForSession.isDisplayed()
-        assert levelDropDownIsDisplayed
-        assert productDropDownIsDisplayed
-        assert examinerSelectIsDisplayed
-    }
-
-    void checkDefaultTitlesInForm() {
-        def data = CommonHelper.jsonToObject("src/test/resources/applicationData.json")
-
-        assert sessionFormTitle == data.sessionForm.formTitle
-        assert sessionDateTitle == data.sessionForm.date
-        assert postalCodeTitle == data.sessionForm.postalCode
-        assert cityTitle == data.sessionForm.city
-        assert addressTitle == data.sessionForm.address
-        assert additionalInformationTitle == data.sessionForm.additionalInformation
-        assert typeOfSpaceTitle == data.sessionForm.typeOfSpace
-        assert spaceForSessionTitle == data.sessionForm.amountOfSpace
-        assert levelSelectTitle == data.sessionForm.level
-        assert productSelectTitle == data.sessionForm.product
-        assert examinerSelectTitle == data.sessionForm.examiner
-        assert getCancelButtonText() == data.sessionForm.cancelButton
-        assert getSaveButtonText() == data.sessionForm.saveButton
-    }
 }

@@ -71,12 +71,12 @@ class AddSessionSpec extends GebReportingSpec {
         selectedProducts.productAmount*.text() == ["0"]
     }
 
-    def "Should be able to create an exam session for one product" () {
+    def "As an admin I want to create exam session for one type of exam in order to prepare exam session"() {
         setup:
         def calendar = new GregorianCalendar()
         calendar.set(2016, 10, 30)  //results in setting date to 2016-11-30
         def Date date = calendar.getTime()
-        def city = "Gdańsk"
+        def city = CommonHelper.getRandomCity()
         to AddSessionPage
 
         when:
@@ -84,15 +84,27 @@ class AddSessionSpec extends GebReportingSpec {
 
         then:
         at(SessionDetailsPage)
-        //TODO: fix StackOverflowError  for the below asserts
-        //assert getCity() == city
-        //assert sessionDetailsPage.getDate() == date
+        getCity == city
+//        getDate == date
 
         cleanup:
         if (page instanceof SessionDetailsPage) {
-            /*TODO: even though the alert is successfully accepted and the session seems to be deleted,
-            an attempt to run the test again will result in duplicate session error on the page.*/
             page.deleteSession()
         }
+    }
+
+    def "Should not be visible duplicate session message when create one session 2 times"() {
+        setup:
+        GregorianCalendar calendar = new GregorianCalendar()
+        calendar.set(2016, 10, 30)  //results in setting date to 2016-11-30
+        Date date = calendar.getTime()
+        String city = "Gdańsk"
+
+        when: "i fill the form and submit it"
+        to AddSessionPage
+        createSessionForOneProductDateCity(date, city)
+
+        then: "i don`t see duplicate session message"
+        !getDuplicateSessionMessageVisibility
     }
 }

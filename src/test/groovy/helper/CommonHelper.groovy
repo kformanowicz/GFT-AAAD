@@ -51,4 +51,11 @@ class CommonHelper {
         String email = RandomStringUtils.randomAlphanumeric(10)
         return email + randomNumber + "@mail.su"
     }
+
+    static String getRandomCity() {
+        Random random = new Random()
+        String randomNumber = random.nextInt(100000000).toString()
+        String city = RandomStringUtils.randomAlphanumeric(10)
+        return city + randomNumber
+    }
 }

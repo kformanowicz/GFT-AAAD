@@ -2,7 +2,6 @@ package test
 
 import geb.spock.GebReportingSpec
 import helper.CommonHelper
-import org.openqa.selenium.By
 import page.ExamPlannerHomePage
 import page.IndividualRegistrationPage
 import page.registration.GroupRegistrationCertificateData
