@@ -40,6 +40,8 @@ dependencies {
         // phantomjs driver pulls in a different selenium version
         transitive = false
     }
+    // https://mvnrepository.com/artifact/org.seleniumhq.selenium/selenium-support
+    compile group: 'org.seleniumhq.selenium', name: 'selenium-support', version: '2.35.0'
 
     // https://mvnrepository.com/artifact/org.apache.commons/commons-lang3
     compile group: 'org.apache.commons', name: 'commons-lang3', version: '3.0'

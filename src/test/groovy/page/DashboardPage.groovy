@@ -42,6 +42,11 @@ class DashboardPage extends Page {
         event.click()
     }
 
+    boolean isSessionEntryPresent(date, city) {
+        //TODO: placeholder, to be implemented
+        return true;
+    }
+
     void assertElementsDisplayed() {
         assert addSessionButton.displayed
         assert registerButton.displayed
@@ -66,4 +71,3 @@ class DashboardPage extends Page {
         return currentMonth
     }
 }
-

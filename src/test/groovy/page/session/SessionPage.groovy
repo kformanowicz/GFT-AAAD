@@ -9,30 +9,30 @@ class SessionPage extends Page{
         backToDashboardButton { $(".Backoffice-backButton", href: "/gftpl/Dashboard/Index") }
         deleteButton { $("button.js-session-delete") }
         sidebar { $(".Sidebar-left").module(SidebarModule) }
-        activateSessionInput {$("input.js-popover")}
+        activateSessionInput {$("input.js-popover", 0)}
     }
 
-    void goBackToDashboard() {
+    def goBackToDashboard() {
         backToDashboardButton.click()
     }
 
-    void deleteSession() {
+    def deleteSession() {
         deleteButton.click()
     }
 
-    void goToExams() {
+    def goToExams() {
         sidebar.sessionExamsLink.click()
     }
 
-    void goToDetails() {
+    def goToDetails() {
         sidebar.sessionDetailsLink.click()
     }
 
-    void goToNotes() {
+    def goToNotes() {
         sidebar.sessionNotesLink.click()
     }
 
-    void goToAttachments() {
+    def goToAttachments() {
         sidebar.sessionAttachmentsLink.click()
     }
 
@@ -40,7 +40,7 @@ class SessionPage extends Page{
         return sidebar.sessionStatus
     }
 
-    void activateSession(){
+    def activateSession(){
         withConfirm(true) {activateSessionInput.click()}
     }
 

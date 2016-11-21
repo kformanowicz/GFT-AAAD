@@ -1,17 +1,14 @@
 package test
 
-import geb.navigator.Navigator
 import geb.spock.GebReportingSpec
 import helper.CommonHelper
 import helper.GroupRegistrationExamForm
-import org.openqa.selenium.By
 import page.ExamPlannerHomePage
 import page.IndividualRegistrationPage
 import page.registration.GroupRegistrationCertificateData
 import page.registration.GroupRegistrationContactData
 import page.registration.GroupRegistrationPageUsers
 import page.registration.RegistrationCompletePage
-import spock.lang.Ignore
 
 
 class IndividualRegistration extends GebReportingSpec {
