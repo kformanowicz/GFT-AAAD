@@ -258,6 +258,7 @@ class AddSessionSpec extends GebReportingSpec {
         then: "i activate session"
         at(SessionDetailsPage)
         activateSession()
+        sleep(1000)
         getSessionStatus() == "Otwarta"
 
         and: "i see chose examines on the Exams page"

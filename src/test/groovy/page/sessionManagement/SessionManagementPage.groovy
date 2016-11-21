@@ -62,32 +62,32 @@ class SessionManagementPage extends Page{
     }
 
 //    SETTERS
-    void setDate(Date data) {
+    def setDate(Date data) {
         def dateString = data.format("dd.MM.yyyy") + " 09:00"
         sessionDateInput.text = dateString
     }
 
-    private void setTodayDate() {
+    private def setTodayDate() {
         sessionDateInput.click().click()
     }
 
-    void setPostalCode(String data) {
+    def setPostalCode(String data) {
         postalCodeInput.text = data
     }
 
-    void setCity(String data) {
+    def setCity(String data) {
         cityInput.text = data
     }
 
-    void setAddress(String data) {
+    def setAddress(String data) {
         addressInput.text = data
     }
 
-    void setAdditionalInformation(String data) {
+    def setAdditionalInformation(String data) {
         additionalInformationInput.text = data
     }
 
-    void setTypeOfSpace(String data = "Dla sesji") {
+    def setTypeOfSpace(String data = "Dla sesji") {
         if (data == "Dla sesji" || data == null) {
             typeOfSpaceSessionRadioButton.click()
         } else if (data == "Dla produktu") {
@@ -95,20 +95,26 @@ class SessionManagementPage extends Page{
         }
     }
 
-    void setAmountOfSpace(int data) {
-        spaceForSession.value("")
-        spaceForSession.value(data)
+    def setAmountOfSpace(def data) {
+        if (data != null) {
+            spaceForSession.value("")
+            spaceForSession.value(data)
+        }
     }
 
-    void setLevel(ArrayList<String> data) {
+    def getSpaceForSessionFieldVisibility(){
+        return spaceForSession.isDisplayed()
+    }
+
+    def setLevel(ArrayList<String> data) {
         selectValuesInMultiselect(data, levelSelectExpandButton, levelSelect)
     }
 
-    void setProductByName(ArrayList<String> data) {
+    def setProductByName(ArrayList<String> data) {
         selectValuesInMultiselect(data, productSelectExpandButton, productSelect)
     }
 
-    void selectValuesInMultiselect(ArrayList<String> data, Navigator expandButton, Navigator select) {
+    def selectValuesInMultiselect(ArrayList<String> data, Navigator expandButton, Navigator select) {
         //required, otherwise the select options cannot be found by text
         expandButton.click()
         //for each of the elements to be selected
@@ -126,13 +132,13 @@ class SessionManagementPage extends Page{
         //cleanup - hide the select
         expandButton.click()
     }
-    void selectValuesInSelect(String data, Navigator expandButton, Navigator select) {
+    def selectValuesInSelect(String data, Navigator expandButton, Navigator select) {
         ArrayList parameterList = new ArrayList();
         parameterList.add(data);
         selectValuesInMultiselect(parameterList, expandButton, select);
     }
 
-    void setExaminerByName(String data) {
+    def setExaminerByName(String data) {
         //waitFor { examinerSelectArea.displayed }
         selectValuesInSelect(data, examinerSelectExpandButton, examinerSelect);
     }
@@ -203,12 +209,12 @@ class SessionManagementPage extends Page{
     }
 
 //    ACTIONS
-    void cancelForm() {
+    def cancelForm() {
         assert cancelButton.isDisplayed()
         cancelButton.click()
     }
 
-    void saveForm(boolean isTransitionToSessionDetailsExpected) {
+    def saveForm(boolean isTransitionToSessionDetailsExpected) {
         assert saveButton.isDisplayed()
         if (isTransitionToSessionDetailsExpected) {
             saveButton.click(SessionDetailsPage)
@@ -218,7 +224,7 @@ class SessionManagementPage extends Page{
     }
 
     def handleForm(Date date, String postalCode, String city, String address, String additionalInformation,
-                   String typeOfSpace, int amountOfSpace, ArrayList<String> level, ArrayList<String> product,
+                   String typeOfSpace, def amountOfSpace=null, ArrayList<String> level, ArrayList<String> product,
                    String examinerByName, boolean save = true) {
         setDate(date)
         setPostalCode(postalCode)
