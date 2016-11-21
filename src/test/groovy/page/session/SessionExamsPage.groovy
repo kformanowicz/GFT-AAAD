@@ -20,15 +20,15 @@ class SessionExamsPage extends SessionPage {
 
         expertLevelExamsLabel { $(".Exam-levelName", text: "Ekspercki") }
         expertLevelSpaces {expertLevelExamsLabel.next().find("span").text()}
-        expertLevelExams { expertLevelExamsLabel.parent().parent().next().moduleList(ExamItemModule) }
+        expertLevelExams { expertLevelExamsLabel.parent().parent().next().children().moduleList(ExamItemModule) }
 
         advancedLevelExamsLabel { $(".Exam-levelName", text: "Zaawansowany") }
         advancedLevelSpaces {advancedLevelExamsLabel.next().find("span").text()}
-        advancedLevelExams { advancedLevelExamsLabel.parent().parent().next().moduleList(ExamItemModule) }
+        advancedLevelExams { advancedLevelExamsLabel.parent().parent().next().children().moduleList(ExamItemModule) }
 
         otherLevelExamsLabel { $(".Exam-levelName", text: "Inny") }
         otherLevelSpaces {otherLevelExamsLabel.next().find("span").text()}
-        otherLevelExams { otherLevelExamsLabel.parent().parent().next().moduleList(ExamItemModule) }
+        otherLevelExams { otherLevelExamsLabel.parent().parent().next().children().moduleList(ExamItemModule) }
     }
 
     def getAllExamsForBasicLevel() {
