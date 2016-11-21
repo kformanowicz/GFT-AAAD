@@ -162,10 +162,9 @@ class AddSessionSpec extends GebReportingSpec {
         and: "i see chose examines on the Exams page"
         goToExams()
         at(SessionExamsPage)
-        sleep(1000)
-//        getAllExamsForBasicLevel() == [["ISTQB Foundation Level / Polski, Angielski, REQB Foundation Level / Polski, Angielski"]]
-//        getAllExamsForAdvancedLevel() == [["ISTQB Advanced Level Test Analyst / Polski, Angielski, ISTQB Advanced Level Technical Test Analyst / Polski, Angielski, ISTQB Advanced Level Test Manager / Polski, Angielski"]]
-//        getAllExamsForExpertLevel() == [["ISTQB Improving the Testing Process / Angielski, ISTQB Test Management / Angielski"]]
+        getAllExamsForBasicLevel() == [["ISTQB Foundation Level / Polski, Angielski, REQB Foundation Level / Polski, Angielski"]]
+        getAllExamsForAdvancedLevel() == [["ISTQB Advanced Level Test Analyst / Polski, Angielski, ISTQB Advanced Level Technical Test Analyst / Polski, Angielski, ISTQB Advanced Level Test Manager / Polski, Angielski"]]
+        getAllExamsForExpertLevel() == [["ISTQB Improving the Testing Process / Angielski, ISTQB Test Management / Angielski"]]
 
         cleanup: "i delete created session"
       //  goToDetails()

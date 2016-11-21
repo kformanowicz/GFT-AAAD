@@ -16,7 +16,7 @@ class SessionExamsPage extends SessionPage {
 
         basicLevelExamsLabel { $(".Exam-levelName", text: "Podstawowy") }
         basicLevelSpaces {basicLevelExamsLabel.next().find("span").text()}
-        basicLevelExams { basicLevelExamsLabel.parent().parent().next().moduleList(ExamItemModule) }
+        basicLevelExams { basicLevelExamsLabel.parent().parent().next().children().moduleList(ExamItemModule) }
 
         expertLevelExamsLabel { $(".Exam-levelName", text: "Ekspercki") }
         expertLevelSpaces {expertLevelExamsLabel.next().find("span").text()}
@@ -31,19 +31,19 @@ class SessionExamsPage extends SessionPage {
         otherLevelExams { otherLevelExamsLabel.parent().parent().next().moduleList(ExamItemModule) }
     }
 
-    String[] getAllExamsForBasicLevel() {
+    def getAllExamsForBasicLevel() {
         return basicLevelExams*.getExamName()
     }
 
-    String[] getAllExamsForAdvancedLevel() {
+    def getAllExamsForAdvancedLevel() {
         return advancedLevelExams*.getExamName()
     }
 
-    String[] getAllExamsForExpertLevel() {
+    def getAllExamsForExpertLevel() {
         return expertLevelExams*.getExamName()
     }
 
-    String[] getAllExamsForOtherLevel() {
+    def getAllExamsForOtherLevel() {
         return otherLevelExams*.getExamName()
     }
 

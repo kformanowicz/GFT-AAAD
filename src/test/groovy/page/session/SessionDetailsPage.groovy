@@ -4,7 +4,8 @@ package page.session
 class SessionDetailsPage extends SessionPage {
     static at = {
         $(".Sidebar-left").displayed
-        !$(".btn-dark", text: "Edytuj").displayed
+        $(".btn-dark", text: "Edytuj").displayed
+        $(".BackofficeDetails-half", 0).text() == "Data sesji"
     }
 
     static content = {
