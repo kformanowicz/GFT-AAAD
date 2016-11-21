@@ -240,7 +240,6 @@ class AddSessionSpec extends GebReportingSpec {
         }
     }
 
-    @Ignore
     def "As an admin I want to activate created exam session so users can start register to it"() {
         setup:
         GregorianCalendar calendar = new GregorianCalendar()

@@ -5,6 +5,7 @@ import helper.CommonHelper
 import page.session.SessionDetailsPage
 import page.sessionManagement.AddSessionPage
 import page.sessionManagement.EditSessionPage
+import spock.lang.Ignore
 
 class EditSessionTypeSpec extends GebReportingSpec {
 
@@ -44,6 +45,7 @@ class EditSessionTypeSpec extends GebReportingSpec {
         getSpaceForSessionFieldVisibility() == false
     }
 
+    @Ignore
     def "As an admin I want to edit exam session in order to change maximum number of participants definition from ‘per exam type’"() {
         setup:
         GregorianCalendar calendar = new GregorianCalendar()
