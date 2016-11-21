@@ -47,7 +47,8 @@ class CertificateDataFormModule extends Module {
     }
 
 //    SETTERS
-    void setName(String name) {
+    def setName(String name) {
+        sleep(1000)
         nameInput.text = name
     }
 

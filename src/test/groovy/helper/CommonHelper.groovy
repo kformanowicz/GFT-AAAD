@@ -41,7 +41,7 @@ class CommonHelper {
 
         LoginPage loginPage = new LoginPage()
         Browser browser = new Browser()
-        browser.to(loginPage)
+        browser.waitFor { browser.to(loginPage) }
         loginPage.logIn(jsonParser.users.get(user).login, jsonParser.users.get(user).password)
     }
 
