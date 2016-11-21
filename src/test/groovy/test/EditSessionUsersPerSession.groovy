@@ -3,6 +3,7 @@ package test
 import geb.spock.GebReportingSpec
 import helper.CommonHelper
 import page.session.SessionDetailsPage
+import page.session.SessionExamsPage
 import page.sessionManagement.AddSessionPage
 import page.sessionManagement.EditSessionPage
 import spock.lang.Unroll
@@ -19,8 +20,8 @@ class EditSessionUsersPerSession extends GebReportingSpec{
 
         handleForm(date, "11-222", city, "ul. Degrengolady 4", "", null, 15, ["Zaawansowany"],
                 ["ISTQB Advanced Level Test Analyst / Polski, Angielski",
-                 "ISTQB Advanced Level Technical Test Analyst / Polski, Angielski",
-                 "ISTQB Advanced Level Test Manager / Polski, Angielski"],
+                 "ISTQB Advanced Level Technical Test Analyst / Polski, Angielski"
+                 ],
                 "GFT Poland1 Test", true)
 
         assert browser.at(SessionDetailsPage)
@@ -41,7 +42,7 @@ class EditSessionUsersPerSession extends GebReportingSpec{
         getSpaces == newUsers.toString()
 
         where:
-        newUsers << [0, 20, 30, 100, 500, 999]
+        newUsers << [20, 30, 100, 500, 999]
 
     }
 
@@ -57,7 +58,7 @@ class EditSessionUsersPerSession extends GebReportingSpec{
         waitFor {browser.at(EditSessionPage)}
 
         then:
-        spaceForSession.enabled
+        spaceForSession.attr('readonly') != "readonly"
     }
 
     def 'I cant edit number of free spaces per session to over 999'(){
@@ -67,9 +68,38 @@ class EditSessionUsersPerSession extends GebReportingSpec{
 
         and:
         setAmountOfSpace(1000)
-        saveForm(true)
+        saveForm(false)
 
         then:
         $("label.text-danger").text() == "Wymagana jest liczba całkowita z zakresu 0-999"
+    }
+
+    @Unroll
+    def "I can add/remove an exam"(){
+        when:
+        editSession()
+        waitFor{browser.at(EditSessionPage)}
+
+        and:
+        setProductByName(
+        dataToSet)
+        saveForm(true)
+
+        and:
+        goToExams()
+        waitFor{browser.at(SessionExamsPage)}
+
+        then:
+        getAllExamsForAdvancedLevel() == dataToSet.collect{it.replace(" / ", "/")}
+
+        where:
+        dataToSet << [["ISTQB Advanced Level Test Analyst / Polski, Angielski",
+                       "ISTQB Advanced Level Technical Test Analyst / Polski, Angielski",
+                       "ISTQB Advanced Level Test Manager / Polski, Angielski"
+                      ],
+                      ["ISTQB Advanced Level Test Analyst / Polski, Angielski",
+                      ]
+        ]
+
     }
 }
