@@ -16,7 +16,6 @@ class SessionDetailsPage extends SessionPage {
         }
         postalCode { $(".row > div:nth-child(1) > .BackofficeDetails-content").text() }
         getCity { $(".col-sm-offset-2 > div.BackofficeDetails-content").text() }
-        getDate {$(".BackofficeDetails-content .BackofficeDetails-half", 0).text()}
         address { $(".col-sm-16.col-sm-offset-2 > div:nth-child(2) > div.BackofficeDetails-content").text() }
         additionalInfo { $(".col-sm-16.col-sm-offset-2 > div:nth-child(3) > div.BackofficeDetails-content").text() }
         deleteSessionButton { $(".js-session-delete") }

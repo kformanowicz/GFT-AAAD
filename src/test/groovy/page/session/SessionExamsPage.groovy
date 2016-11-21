@@ -31,19 +31,19 @@ class SessionExamsPage extends SessionPage {
         otherLevelExams { otherLevelExamsLabel.parent().parent().next().moduleList(ExamItemModule) }
     }
 
-    String[] getAllExamsForBasicLevel(){
+    String[] getAllExamsForBasicLevel() {
         return basicLevelExams*.getExamName()
     }
 
-    String[] getAllExamsForAdvancedLevel(){
+    String[] getAllExamsForAdvancedLevel() {
         return advancedLevelExams*.getExamName()
     }
 
-    String[] getAllExamsForExpertLevel(){
+    String[] getAllExamsForExpertLevel() {
         return expertLevelExams*.getExamName()
     }
 
-    String[] getAllExamsForOtherLevel(){
+    String[] getAllExamsForOtherLevel() {
         return otherLevelExams*.getExamName()
     }
 
