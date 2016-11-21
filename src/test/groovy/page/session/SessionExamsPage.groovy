@@ -43,7 +43,7 @@ class SessionExamsPage extends SessionPage {
         return expertLevelExams*.getExamName()
     }
 
-    String[] getAllExamsForOtherLevel() {
+    def getAllExamsForOtherLevel() {
         return otherLevelExams*.getExamName()
     }
 

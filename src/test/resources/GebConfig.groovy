@@ -49,5 +49,5 @@ environments {
 
 // To run the tests with all browsers just run “./gradlew test”
 
-baseUrl = "https://examplanner.pgs-soft.com/gftpl/"
+baseUrl = "https://examplanner-v2.pgs-soft.com/gftpl/"
 autoClearCookies = false
