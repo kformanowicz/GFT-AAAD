@@ -265,6 +265,7 @@ class AddSessionSpec extends GebReportingSpec {
         at(SessionExamsPage)
         sleep(1000)
         getAllExamsForAdvancedLevel() == ["ISTQB Advanced Level Test Analyst/Polski, Angielski", "ISTQB Advanced Level Technical Test Analyst/Polski, Angielski", "ISTQB Advanced Level Test Manager/Polski, Angielski"]
+        waitFor {getSessionStatus() == "Otwarta"}
 
         cleanup: "i delete created session"
         goToDetails()
