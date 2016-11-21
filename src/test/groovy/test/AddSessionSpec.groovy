@@ -168,7 +168,7 @@ class AddSessionSpec extends GebReportingSpec {
 //        getAllExamsForExpertLevel() == [["ISTQB Improving the Testing Process / Angielski, ISTQB Test Management / Angielski"]]
 
         cleanup: "i delete created session"
-        goToDetails()
+      //  goToDetails()
         at(SessionDetailsPage)
         sleep(1000)
         if (page instanceof SessionDetailsPage) {
@@ -181,7 +181,37 @@ class AddSessionSpec extends GebReportingSpec {
     }
 
     def "As an admin I want to create exam session with maximum number of participants defined per exam session in order to prepare exam session"() {
+        setup:
+        final String MAX_ALLOWED_PARTICIPANTS_PER_SESSION = "999"
+        GregorianCalendar calendar = new GregorianCalendar()
+        calendar.set(2016, 10, 30)  //results in setting date to 2016-11-30
+        Date date = calendar.getTime()
+        String city = CommonHelper.getRandomCity()
+        to AddSessionPage
 
+        when: "i handle new session form with maximum number of allowed participants per session (999) and submit it"
+        handleForm(date, "11-222", city, "ul. Degrengolady 4", "", null, 999,
+                ["Podstawowy", "Zaawansowany", "Ekspercki"],
+                ["ISTQB Foundation Level / Polski, Angielski",
+                 "REQB Foundation Level / Polski, Angielski",
+                 "ISTQB Advanced Level Test Analyst / Polski, Angielski",
+                 "ISTQB Advanced Level Technical Test Analyst / Polski, Angielski",
+                 "ISTQB Advanced Level Test Manager / Polski, Angielski",
+                 "ISTQB Improving the Testing Process / Angielski",
+                 "ISTQB Test Management / Angielski"],
+                "GFT Poland1 Test", true)
+
+        then: "i see maximum number of participants on the details page"
+        at(SessionDetailsPage)
+        getSpaces == MAX_ALLOWED_PARTICIPANTS_PER_SESSION
+
+        cleanup: "i delete created session"
+        goToDetails()
+        at(SessionDetailsPage)
+        sleep(1000)
+        if (page instanceof SessionDetailsPage) {
+            page.deleteSession()
+        }
     }
 
     def "As an admin I want to activate created exam session so users can start register to it"() {

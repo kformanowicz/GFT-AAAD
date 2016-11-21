@@ -10,7 +10,7 @@ class SessionDetailsPage extends SessionPage {
     static content = {
         getSessionDate { $("div.BackofficeDetails-content.clearfix > div", 0).text() }
         getSessionTime { $("div.BackofficeDetails-content.clearfix > div", 1).text() }
-        spaces { $(".BackofficeDetails-column--hasBorderRight > div:nth-child(2) > .BackofficeDetails-content").text() }
+        getSpaces { $(".BackofficeDetails-column--hasBorderRight > div:nth-child(2) > .BackofficeDetails-content").text() }
         examiner {
             $(".BackofficeDetails-column--hasBorderRight > div:nth-child(3) > .BackofficeDetails-content").text()
         }
