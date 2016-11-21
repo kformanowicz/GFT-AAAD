@@ -82,14 +82,14 @@ class AddSessionSpec extends GebReportingSpec {
         String city = CommonHelper.getRandomCity()
         to AddSessionPage
 
-        when:
+        when: "i handle new session form and submit it"
         createSessionForOneProductDateCity(date, city)
 
-        then:
+        then: "i see session details page and correct data"
         at(SessionDetailsPage)
         getCity == city
 
-        cleanup:
+        cleanup: "i delete created session"
         if (page instanceof SessionDetailsPage) {
             page.deleteSession()
         }
@@ -118,18 +118,18 @@ class AddSessionSpec extends GebReportingSpec {
         String city = CommonHelper.getRandomCity()
         to AddSessionPage
 
-        when:
+        when: "i handle new session form and submit it"
         handleForm(date, "11-222", city, "ul. Degrengolady 4", "", null, 15, ["Zaawansowany"],
                 ["ISTQB Advanced Level Test Analyst / Polski, Angielski",
                  "ISTQB Advanced Level Technical Test Analyst / Polski, Angielski",
                  "ISTQB Advanced Level Test Manager / Polski, Angielski"],
                 "GFT Poland1 Test", true)
 
-        then:
+        then: "i see session detail page and correct data"
         at(SessionDetailsPage)
         getCity == city
 
-        cleanup:
+        cleanup: "i delete created session"
         if (page instanceof SessionDetailsPage) {
             page.deleteSession()
         }
@@ -143,7 +143,7 @@ class AddSessionSpec extends GebReportingSpec {
         String city = CommonHelper.getRandomCity()
         to AddSessionPage
 
-        when:
+        when: "i handle new session form and submit it"
         handleForm(date, "11-222", city, "ul. Degrengolady 4", "", null, 15,
                 ["Podstawowy", "Zaawansowany", "Ekspercki"],
                 ["ISTQB Foundation Level / Polski, Angielski",
@@ -167,7 +167,7 @@ class AddSessionSpec extends GebReportingSpec {
 //        getAllExamsForAdvancedLevel() == [["ISTQB Advanced Level Test Analyst / Polski, Angielski, ISTQB Advanced Level Technical Test Analyst / Polski, Angielski, ISTQB Advanced Level Test Manager / Polski, Angielski"]]
 //        getAllExamsForExpertLevel() == [["ISTQB Improving the Testing Process / Angielski, ISTQB Test Management / Angielski"]]
 
-        cleanup:
+        cleanup: "i delete created session"
         goToDetails()
         at(SessionDetailsPage)
         sleep(1000)
@@ -192,7 +192,7 @@ class AddSessionSpec extends GebReportingSpec {
         String city = CommonHelper.getRandomCity()
         to AddSessionPage
 
-        when:
+        when: "i handle new session form and submit it"
         handleForm(date, "11-222", city, "ul. Degrengolady 4", "", null, 15, ["Zaawansowany"],
                 ["ISTQB Advanced Level Test Analyst / Polski, Angielski",
                  "ISTQB Advanced Level Technical Test Analyst / Polski, Angielski",
@@ -204,7 +204,7 @@ class AddSessionSpec extends GebReportingSpec {
         activateSession()
         getSessionStatus() == "Otwarta - potwierdzony"
 
-        cleanup:
+        cleanup: "i delete created session"
         if (page instanceof SessionDetailsPage) {
             page.deleteSession()
         }
