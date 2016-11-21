@@ -2,7 +2,7 @@ package test
 
 import geb.spock.GebReportingSpec
 import helper.CommonHelper
-import page.AddSessionPage
+import page.sessionManagement.AddSessionPage
 import page.session.SessionDetailsPage
 import page.session.SessionExamsPage
 import spock.lang.Ignore
@@ -231,7 +231,7 @@ class AddSessionSpec extends GebReportingSpec {
         then: "i activate session"
         at(SessionDetailsPage)
         activateSession()
-        getSessionStatus() == "Otwarta - potwierdzony"
+        getSessionStatus() == "Otwarta"
 
         cleanup: "i delete created session"
         if (page instanceof SessionDetailsPage) {

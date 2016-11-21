@@ -1,4 +1,4 @@
-package page
+package page.sessionManagement
 
 import geb.Page
 import geb.module.RadioButtons
@@ -8,15 +8,8 @@ import geb.navigator.Navigator
 import page.module.addSessionPage.SelectedProductModule
 import page.session.SessionDetailsPage
 
-class AddSessionPage extends Page {
 
-    static url = "Session/AddSession"
-
-    static at = {
-        title == "- ExamPlanner"
-        $(".col-sm-15.col-sm-offset-8.clearfix").isDisplayed()
-    }
-
+class SessionManagementPage extends Page{
     static content = {
         sessionForm { $(".col-sm-15.col-sm-offset-8.clearfix") }
         sessionFormTitle { $(".Backoffice-header.text-center h3").text() }
@@ -225,8 +218,8 @@ class AddSessionPage extends Page {
     }
 
     def handleForm(Date date, String postalCode, String city, String address, String additionalInformation,
-                    String typeOfSpace, int amountOfSpace, ArrayList<String> level, ArrayList<String> product,
-                    String examinerByName, boolean save = true) {
+                   String typeOfSpace, int amountOfSpace, ArrayList<String> level, ArrayList<String> product,
+                   String examinerByName, boolean save = true) {
         setDate(date)
         setPostalCode(postalCode)
         setCity(city)
@@ -246,13 +239,4 @@ class AddSessionPage extends Page {
             cancelForm()
         }
     }
-
-    def createSessionForOneProductDateCity(Date date, String city) {
-        sleep(1000)
-        handleForm(date, "11-222", city, "ul. Degrengolady 4", "", null, 15,
-                ["Zaawansowany"],
-                ["ISTQB Advanced Level Test Analyst / Polski, Angielski"],
-                "GFT Poland1 Test", true)
-    }
-
 }

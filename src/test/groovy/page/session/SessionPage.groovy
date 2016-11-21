@@ -6,6 +6,7 @@ import page.module.sessionPage.SidebarModule
 class SessionPage extends Page{
 
     static content = {
+        editSessionButton { $(".btn-dark", text: "Edytuj") }
         backToDashboardButton { $(".Backoffice-backButton", href: "/gftpl/Dashboard/Index") }
         deleteButton { $("button.js-session-delete") }
         sidebar { $(".Sidebar-left").module(SidebarModule) }
@@ -42,6 +43,10 @@ class SessionPage extends Page{
 
     def activateSession(){
         withConfirm(true) {activateSessionInput.click()}
+    }
+
+    void editSession(){
+        editSessionButton.click()
     }
 
 }
