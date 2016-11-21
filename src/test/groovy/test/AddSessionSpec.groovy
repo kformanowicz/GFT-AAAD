@@ -167,7 +167,7 @@ class AddSessionSpec extends GebReportingSpec {
         getAllExamsForExpertLevel() == [["ISTQB Improving the Testing Process / Angielski, ISTQB Test Management / Angielski"]]
 
         cleanup: "i delete created session"
-      //  goToDetails()
+          goToDetails()
         at(SessionDetailsPage)
         sleep(1000)
         if (page instanceof SessionDetailsPage) {
@@ -231,7 +231,7 @@ class AddSessionSpec extends GebReportingSpec {
         then: "i activate session"
         at(SessionDetailsPage)
         activateSession()
-        getSessionStatus() == "Otwarta - potwierdzony"
+        waitFor {getSessionStatus() == "Otwarta"}
 
         cleanup: "i delete created session"
         if (page instanceof SessionDetailsPage) {

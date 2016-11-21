@@ -11,9 +11,9 @@ class BaseDataFormModule extends Module {
 
     static content = {
         availableLanguagesTitle { $("label", for: "AvailableLanguages").text() }
-        optionPoland { $("#ProductSelectionDto_ProductLanguage21") }
+        optionPoland { $("[for*=ProductLanguage]", text: "Polski") }
         getOptionPolandLabel { optionPoland.find("label").text() }
-        optionEnglish { $("#ProductSelectionDto_ProductLanguage22") }
+        optionEnglish { $("[for*=ProductLanguage]", text: "Angielski") }
         getOptionEnglishLabel { optionEnglish.find("label").text() }
 
         availableProductTitle { $("label", for: "AvailableProductForms").text() }
