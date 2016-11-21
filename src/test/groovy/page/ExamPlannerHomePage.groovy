@@ -23,7 +23,6 @@ class ExamPlannerHomePage extends Page {
      * @return
      */
     Navigator getAgendaByDateAndPlace(String dateAndPlace) {
-        println(agendas*.getNameAndPlace());
         return agendas.find {it.getNameAndPlace().trim() == dateAndPlace}
     }
 
