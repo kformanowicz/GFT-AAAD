@@ -89,7 +89,16 @@ class AddSessionSpec extends GebReportingSpec {
         at(SessionDetailsPage)
         getCity == city
 
+        and: "i see chose examines on the Exams page"
+        goToExams()
+        at(SessionExamsPage)
+        sleep(1000)
+        getAllExamsForAdvancedLevel() == ["ISTQB Advanced Level Test Analyst/Polski, Angielski"]
+
         cleanup: "i delete created session"
+        goToDetails()
+        at(SessionDetailsPage)
+        sleep(1000)
         if (page instanceof SessionDetailsPage) {
             page.deleteSession()
         }
@@ -129,7 +138,16 @@ class AddSessionSpec extends GebReportingSpec {
         at(SessionDetailsPage)
         getCity == city
 
+        and: "i see chose examines on the Exams page"
+        goToExams()
+        at(SessionExamsPage)
+        sleep(1000)
+        getAllExamsForAdvancedLevel() == ["ISTQB Advanced Level Test Analyst/Polski, Angielski", "ISTQB Advanced Level Technical Test Analyst/Polski, Angielski", "ISTQB Advanced Level Test Manager/Polski, Angielski"]
+
         cleanup: "i delete created session"
+        goToDetails()
+        at(SessionDetailsPage)
+        sleep(1000)
         if (page instanceof SessionDetailsPage) {
             page.deleteSession()
         }
@@ -163,12 +181,12 @@ class AddSessionSpec extends GebReportingSpec {
         goToExams()
         at(SessionExamsPage)
         sleep(1000)
-//        getAllExamsForBasicLevel() == [["ISTQB Foundation Level / Polski, Angielski, REQB Foundation Level / Polski, Angielski"]]
-//        getAllExamsForAdvancedLevel() == [["ISTQB Advanced Level Test Analyst / Polski, Angielski, ISTQB Advanced Level Technical Test Analyst / Polski, Angielski, ISTQB Advanced Level Test Manager / Polski, Angielski"]]
-//        getAllExamsForExpertLevel() == [["ISTQB Improving the Testing Process / Angielski, ISTQB Test Management / Angielski"]]
+        getAllExamsForBasicLevel() == ["ISTQB Foundation Level/Polski, Angielski", "REQB Foundation Level/Polski, Angielski"]
+        getAllExamsForAdvancedLevel() == ["ISTQB Advanced Level Test Analyst/Polski, Angielski", "ISTQB Advanced Level Technical Test Analyst/Polski, Angielski", "ISTQB Advanced Level Test Manager/Polski, Angielski"]
+        getAllExamsForExpertLevel() == ["ISTQB Improving the Testing Process/Angielski", "ISTQB Test Management/Angielski"]
 
         cleanup: "i delete created session"
-      //  goToDetails()
+        goToDetails()
         at(SessionDetailsPage)
         sleep(1000)
         if (page instanceof SessionDetailsPage) {
@@ -205,6 +223,14 @@ class AddSessionSpec extends GebReportingSpec {
         at(SessionDetailsPage)
         getSpaces == MAX_ALLOWED_PARTICIPANTS_PER_SESSION
 
+        and: "i see chose examines on the Exams page"
+        goToExams()
+        at(SessionExamsPage)
+        sleep(1000)
+        getAllExamsForBasicLevel() == ["ISTQB Foundation Level/Polski, Angielski", "REQB Foundation Level/Polski, Angielski"]
+        getAllExamsForAdvancedLevel() == ["ISTQB Advanced Level Test Analyst/Polski, Angielski", "ISTQB Advanced Level Technical Test Analyst/Polski, Angielski", "ISTQB Advanced Level Test Manager/Polski, Angielski"]
+        getAllExamsForExpertLevel() == ["ISTQB Improving the Testing Process/Angielski", "ISTQB Test Management/Angielski"]
+
         cleanup: "i delete created session"
         goToDetails()
         at(SessionDetailsPage)
@@ -232,9 +258,19 @@ class AddSessionSpec extends GebReportingSpec {
         then: "i activate session"
         at(SessionDetailsPage)
         activateSession()
+        sleep(1000)
         getSessionStatus() == "Otwarta - potwierdzony"
 
+        and: "i see chose examines on the Exams page"
+        goToExams()
+        at(SessionExamsPage)
+        sleep(1000)
+        getAllExamsForAdvancedLevel() == ["ISTQB Advanced Level Test Analyst/Polski, Angielski", "ISTQB Advanced Level Technical Test Analyst/Polski, Angielski", "ISTQB Advanced Level Test Manager/Polski, Angielski"]
+
         cleanup: "i delete created session"
+        goToDetails()
+        at(SessionDetailsPage)
+        sleep(1000)
         if (page instanceof SessionDetailsPage) {
             page.deleteSession()
         }
