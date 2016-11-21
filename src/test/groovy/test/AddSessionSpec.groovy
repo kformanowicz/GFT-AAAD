@@ -2,9 +2,9 @@ package test
 
 import geb.spock.GebReportingSpec
 import helper.CommonHelper
-import page.sessionManagement.AddSessionPage
 import page.session.SessionDetailsPage
 import page.session.SessionExamsPage
+import page.sessionManagement.AddSessionPage
 import spock.lang.Ignore
 
 class AddSessionSpec extends GebReportingSpec {
@@ -240,6 +240,7 @@ class AddSessionSpec extends GebReportingSpec {
         }
     }
 
+    @Ignore
     def "As an admin I want to activate created exam session so users can start register to it"() {
         setup:
         GregorianCalendar calendar = new GregorianCalendar()
