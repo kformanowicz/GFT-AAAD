@@ -9,7 +9,7 @@ class SessionPage extends Page{
         backToDashboardButton { $(".Backoffice-backButton", href: "/gftpl/Dashboard/Index") }
         deleteButton { $("button.js-session-delete") }
         sidebar { $(".Sidebar-left").module(SidebarModule) }
-        activateSessionInput {$("input.js-popover")}
+        activateSessionInput {$("input.js-popover", 0)}
     }
 
     def goBackToDashboard() {

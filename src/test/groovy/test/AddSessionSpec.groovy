@@ -185,6 +185,28 @@ class AddSessionSpec extends GebReportingSpec {
     }
 
     def "As an admin I want to activate created exam session so users can start register to it"() {
+        setup:
+        GregorianCalendar calendar = new GregorianCalendar()
+        calendar.set(2016, 10, 30)  //results in setting date to 2016-11-30
+        Date date = calendar.getTime()
+        String city = CommonHelper.getRandomCity()
+        to AddSessionPage
 
+        when:
+        handleForm(date, "11-222", city, "ul. Degrengolady 4", "", null, 15, ["Zaawansowany"],
+                ["ISTQB Advanced Level Test Analyst / Polski, Angielski",
+                 "ISTQB Advanced Level Technical Test Analyst / Polski, Angielski",
+                 "ISTQB Advanced Level Test Manager / Polski, Angielski"],
+                "GFT Poland1 Test", true)
+
+        then: "i activate session"
+        at(SessionDetailsPage)
+        activateSession()
+        getSessionStatus() == "Otwarta - potwierdzony"
+
+        cleanup:
+        if (page instanceof SessionDetailsPage) {
+            page.deleteSession()
+        }
     }
 }
