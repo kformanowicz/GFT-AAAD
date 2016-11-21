@@ -14,7 +14,7 @@ class GroupRegistrationCertificateData extends RegistrationPage {
         postalCodeInput { $("#AddressDto_PostalCode").module(TextInput) }
         cityInput { $("#AddressDto_City").module(TextInput) }
         addressInput { $("#AddressDto_Address").module(TextInput) }
-        additionalInfoInput { $("#AddressDto_Comment").module(TextInput) }
+        additionalInfoInput { $("#AddressDto_Comment") }
 
         noInvoiceButton { $("#AddressDto_InvoiceTypesNone") }
         electronicInvoiceButton { $("#AddressDto_InvoiceTypesElectronic") }
@@ -28,13 +28,13 @@ class GroupRegistrationCertificateData extends RegistrationPage {
     }
 
 
-    void fillAndSubmitForm(String name, String lastName, String postalCode, String city, String address, String comment) {
+    boolean fillAndSubmitForm(String name, String lastName, String postalCode, String city, String address, String comment) {
         nameInput.text = name
         lastNameInput.text = lastName
         postalCodeInput.text = postalCode
         cityInput.text = city
         addressInput.text = address
-        additionalInfoInput.text = comment
+        additionalInfoInput.value(comment)
 
         noInvoiceButton.click() // dont think it's needed in user stories
 
@@ -42,5 +42,7 @@ class GroupRegistrationCertificateData extends RegistrationPage {
         marketingCheckbox.click()
 
         registerButton.click()
+
+        return true // all good
     }
 }
