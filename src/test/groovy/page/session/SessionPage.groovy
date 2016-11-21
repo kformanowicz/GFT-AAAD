@@ -45,7 +45,7 @@ class SessionPage extends Page{
         withConfirm(true) {activateSessionInput.click()}
     }
 
-    void editSession(){
+    def editSession(){
         editSessionButton.click()
     }
 
