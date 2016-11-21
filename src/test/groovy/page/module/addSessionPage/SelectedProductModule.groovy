@@ -31,7 +31,7 @@ class SelectedProductModule extends Module {
         return productDeleteIcon*.isDisplayed()
     }
 
-    String getproductWarningMessage() {
+    String getProductWarningMessage() {
         return productWarningText.text()
     }
 

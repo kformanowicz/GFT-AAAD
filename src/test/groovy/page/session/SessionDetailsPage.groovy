@@ -21,7 +21,7 @@ class SessionDetailsPage extends SessionPage {
         deleteSessionButton { $(".js-session-delete") }
     }
 
-    void deleteSession() {
+    def deleteSession() {
         deleteSessionButton.click()
         driver.switchTo().alert().accept()
     }

@@ -56,18 +56,22 @@ class AddSessionSpec extends GebReportingSpec {
     }
 
     @Ignore
-    def "Should handle session form"() {
+    def "Should handle session form and check selected data"() {
         given: "i am on the add new session page"
+        GregorianCalendar calendar = new GregorianCalendar()
+        calendar.set(2016, 10, 30)  //results in setting date to 2016-11-30
+        Date date = calendar.getTime()
         to AddSessionPage
 
         when: "i handle new session form"
-        handleForm("today", "11-111", "Address", "additional Information", "Dla sesji", 2, ["Podstawowy"],
+        handleForm(date, "11-111", "City", "Address", "additional Information", "Dla sesji", 2, ["Podstawowy"],
                 ["ISTQB Foundation Level / Polski, Angielski"], "GFT Poland1 Test", false)
 
         then: "i should have valid chosen data"
-        selectedProducts.products.size() == 1
-        selectedProducts.productTitle*.text() == ["ISTQB Foundation Level / Polski, Angielski"]
-        selectedProducts.productAmount*.text() == ["0"]
+        selectedProducts.getAmountOfSelectedProducts() == 1
+        selectedProducts.getSelectedProductsTitle() == ["ISTQB Foundation Level / Polski, Angielski"]
+        selectedProducts.getSelectedProductsAmount() == ["0"]
+        selectedProducts.getSelectedProductsDeleteIconVisibility() == [true]
     }
 
     def "As an admin I want to create exam session for one type of exam in order to prepare exam session"() {
