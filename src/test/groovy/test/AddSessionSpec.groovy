@@ -2,7 +2,7 @@ package test
 
 import geb.spock.GebReportingSpec
 import helper.CommonHelper
-import page.AddSessionPage
+import page.sessionManagement.AddSessionPage
 import page.session.SessionDetailsPage
 import page.session.SessionExamsPage
 import spock.lang.Ignore
@@ -258,8 +258,7 @@ class AddSessionSpec extends GebReportingSpec {
         then: "i activate session"
         at(SessionDetailsPage)
         activateSession()
-        sleep(1000)
-        getSessionStatus() == "Otwarta - potwierdzony"
+        getSessionStatus() == "Otwarta"
 
         and: "i see chose examines on the Exams page"
         goToExams()

@@ -12,7 +12,6 @@ class SessionExamsPage extends SessionPage {
     }
 
     static content = {
-        editSessionButton { $(".btn-dark", text: "Edytuj") }
 
         basicLevelExamsLabel { $(".Exam-levelName", text: "Podstawowy") }
         basicLevelSpaces {basicLevelExamsLabel.next().find("span").text()}
