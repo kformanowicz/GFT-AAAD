@@ -11,12 +11,10 @@ import spock.lang.Ignore
 class DashboardSpec extends GebReportingSpec {
 
     def setupSpec() {
-        println("spec setup")
         CommonHelper.logInAsUser1()
     }
 
     def setup() {
-        println("setup")
         to DashboardPage
     }
 

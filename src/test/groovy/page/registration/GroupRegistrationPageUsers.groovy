@@ -4,8 +4,10 @@ import geb.module.TextInput
 
 class GroupRegistrationPageUsers extends RegistrationPage {
     static at = {
-        getHeader() == "Rejestracja grupowa na termin"
+//        $(".Register-header.clearfix h3").text() == "Rejestracja grupowa na termin"
 //        $(".Registration-products .radio input", 0).displayed
+        sleep(200)
+        return true
     }
 
     static content = {
@@ -16,8 +18,8 @@ class GroupRegistrationPageUsers extends RegistrationPage {
 
         availableExams { $(".Registration-products .radio input") }
 
-        polishLanguageButton { $("input#RegistrationLanguageID21") }
-        englishLanguageButton { $("input#RegistrationLanguageID21") }
+        polishLanguageButton { $("#RegistrationLanguageID21") }
+        englishLanguageButton { $("#RegistrationLanguageID22") }
 
         paperFormButton { $("#ProductFormIdpapierowa") }
         electronicFormButton { $("#ProductFormIdelektroniczna") }
@@ -27,6 +29,7 @@ class GroupRegistrationPageUsers extends RegistrationPage {
         certificateProviderInput { $(".registration__product-options__certificate-provider").module(TextInput) }
 
         forwardButton { $(".button--accept") }
+        addAttendeeButton {$(".btn-registrationAddAttendee")}
     }
 
     void selectExam(name) {
@@ -34,28 +37,24 @@ class GroupRegistrationPageUsers extends RegistrationPage {
     }
 
     void setLanguage(boolean polish) {
-        if (polish) {
-            polishLanguageButton.click()
-        } else {
-            englishLanguageButton.click()
-        }
+        polish ? polishLanguageButton.click() : englishLanguageButton.click()
     }
 
     void setForm(boolean paper) {
-        if (paper) {
-            paperFormButton.click()
-        } else {
-            electronicFormButton.click()
-        }
+        paper ? paperFormButton.click() : electronicFormButton.click()
     }
 
-    def accept() {
+    void accept() {
         forwardButton.click()
     }
 
+    void addAttendee(){
+        addAttendeeButton.click()
+    }
+
     def fillAndSubmitFormSingleUser(String name, String surname, String email, String phone, String examName,
-                                    boolean setPolish = true, boolean setPaper = true, String certificateNumber = null,
-                                    String certificateDate = null, String certificateProvider = null, accept = true) {
+                                    boolean setPolish = false, boolean setPaper = true, String certificateNumber = "",
+                                    String certificateDate = "", String certificateProvider = "", accept = true) {
         nameInput.text = name
         lastNameInput.text = surname
         emailInput.text = email
@@ -63,12 +62,12 @@ class GroupRegistrationPageUsers extends RegistrationPage {
 
         selectExam(examName)
 
-        waitFor { polishLanguageButton.displayed }
+        sleep(500) // ugly but works
 
         setLanguage(setPolish)
         setForm(setPaper)
 
-        if (!examName =~ /Foundation|Agile/) { //fill certificate info only for advanced & expert exams
+        if (!(examName =~ /Foundation|Agile/)) { //fill certificate info only for advanced & expert exams
             certificateNumberInput.text = certificateNumber
             certificateDateInput.text = certificateDate
             certificateProviderInput.text = certificateProvider
@@ -79,12 +78,15 @@ class GroupRegistrationPageUsers extends RegistrationPage {
         }
     }
 
-    def fillAndSubmitFormMultiUsers(Object usersData) {
+    boolean fillAndSubmitFormMultiUsers(usersData) {
         usersData.each {
             fillAndSubmitFormSingleUser(it.name, it.surname, it.email, it.phone, it.examName, it.setPolish, it.setPaper,
                     it.certificateNumber, it.certificateDate, it.certificateProvider, false)
-        }
 
+            addAttendee()
+        }
         accept()
+
+        return true // everything went fine
     }
 }

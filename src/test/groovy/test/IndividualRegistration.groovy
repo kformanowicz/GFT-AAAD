@@ -2,13 +2,13 @@ package test
 
 import geb.spock.GebReportingSpec
 import helper.CommonHelper
+import helper.GroupRegistrationExamForm
 import page.ExamPlannerHomePage
 import page.IndividualRegistrationPage
 import page.registration.GroupRegistrationCertificateData
 import page.registration.GroupRegistrationContactData
 import page.registration.GroupRegistrationPageUsers
 import page.registration.RegistrationCompletePage
-import spock.lang.Ignore
 
 
 class IndividualRegistration extends GebReportingSpec {
@@ -78,27 +78,23 @@ class IndividualRegistration extends GebReportingSpec {
         completeRegistrationPage.getNextRegistrationButtonText() == "Zarejestruj się na kolejny egzamin"
     }
 
-    @Ignore
     def "As a user I want to register group of users to exam in order they can participate in it"() {
         given: "i am on the home page"
         to ExamPlannerHomePage
 
         when: "i chose group registration"
-        //TODO
-        getAgendaByDateAndPlace("30 listopada 2016, Sopot")
-//        $(By.xpath("/html/body/div[2]/div/div/div[3]/div[6]/div[3]/div[3]/div[3]")).click()
+        getAgendaByDateAndPlace("30 listopada 2016, Sopot").registerGroup()
 
         then: "i see group registration form"
         at GroupRegistrationPageUsers
 
         and: "i fill the group form"
-//        TODO resolve examName error
-        fillAndSubmitFormMultiUsers({
-            [name : "name", surname: "surname", email: CommonHelper.getRandomEmail(),
-             phone: "123123123", examName: "ISTQB Agile Tester Extension"];
-            [name : "name2", surname: "surname2", email: CommonHelper.getRandomEmail(),
-             phone: "123123123", examName: "ISTQB Agile Tester Extension"];
-        })
+        fillAndSubmitFormMultiUsers([
+                new GroupRegistrationExamForm("name", "surname", "123123123",
+                        "ISTQB Agile Tester Extension", false, true),
+                new GroupRegistrationExamForm("name2", "surname2", "123123123",
+                        "ISTQB Agile Tester Extension", false, true)
+        ])
 
         and: "i see contact registration form"
         at GroupRegistrationContactData
@@ -116,31 +112,25 @@ class IndividualRegistration extends GebReportingSpec {
         at RegistrationCompletePage
     }
 
-    @Ignore
     def "As a user I want to register group of users to different exams in order they can participate in them"() {
         given: "i am on the home page"
         to ExamPlannerHomePage
 
         when: "i chose group registration"
-        //TODO
-        getAgendaByDateAndPlace("30 listopada 2016, Sopot")
-//        $(By.xpath("/html/body/div[2]/div/div/div[3]/div[6]/div[3]/div[3]/div[3]")).click()
+        getAgendaByDateAndPlace("30 listopada 2016, Sopot").registerGroup()
 
         then: "i see group registration form"
-        at GroupRegistrationPageUsers
+        waitFor { at GroupRegistrationPageUsers }
 
         and: "i fill the group form"
-//        TODO resolve examName error
-        fillAndSubmitFormMultiUsers({
-            [name : "name", surname: "surname", email: CommonHelper.getRandomEmail(),
-             phone: "123123123", examName: "ISTQB Agile Tester Extension"];
-            [name : "name2", surname: "surname2", email: CommonHelper.getRandomEmail(),
-             phone: "123123123", examName: "ISTQB Advanced Level Test Analyst"];
-            [name : "name3", surname: "surname3", email: CommonHelper.getRandomEmail(),
-             phone: "123123123", examName: "ISTQB Improving the Testing Process"];
-            [name : "name4", surname: "surname4", email: CommonHelper.getRandomEmail(),
-             phone: "123123123", examName: "REQB Foundation Level"];
-        })
+        fillAndSubmitFormMultiUsers([
+                new GroupRegistrationExamForm("name", "surname", "123123123", "ISTQB Agile Tester Extension", false, true),
+                new GroupRegistrationExamForm("name2", "surname2", "123123123", "ISTQB Advanced Level Test Analyst",
+                        false, true, "11111", "15.06.2016", "ASDF"),
+                new GroupRegistrationExamForm("name3", "surname3", "123123123", "ISTQB Improving the Testing Process",
+                        false, true, "11111", "15.06.2016", "ASDF"),
+                new GroupRegistrationExamForm("name4", "surname4", "123123123", "REQB Foundation Level", false, true)
+        ])
 
         and: "i see contact registration form"
         at GroupRegistrationContactData

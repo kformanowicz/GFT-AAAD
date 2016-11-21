@@ -5,17 +5,19 @@ import geb.module.TextInput
 
 class GroupRegistrationContactData extends RegistrationPage{
     static at = {
-        $("button.prev-btn").displayed
+//        $("button.prev-btn").displayed
+        sleep(200)
+        return true
     }
 
     static content = {
         nameInput {$("#PersonDataDto_Name").module(TextInput)}
         lastNameInput {$("#PersonDataDto_Surname").module(TextInput)}
-        emailInput {$("#PersonDataDto\\.Surname").module(TextInput)} // lol
+        emailInput {$("#PersonDataDto_Email").module(TextInput)}
         phoneInput {$("#PersonDataDto_Phone").module(TextInput)}
 
         backToUsersButton {$("button.prev-btn")}
-        acceptButton {$("button", type: "submit")}
+        acceptButton {$("button.btn-dark", type: "submit")}
     }
 
     void setName(name) {
@@ -42,12 +44,14 @@ class GroupRegistrationContactData extends RegistrationPage{
         acceptButton.click()
     }
 
-    void fillAndSubmitForm(String name, String lastName, String email, String phone){
+    boolean fillAndSubmitForm(String name, String lastName, String email, String phone){
         setName(name)
         setLastName(lastName)
         setEmail(email)
         setPhone(phone)
 
         accept()
+
+        return true //all ok
     }
 }
